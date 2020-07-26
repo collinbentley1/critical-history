@@ -1,0 +1,18 @@
+baseURL = "https://ycriticalhistory.org/"
+languageCode = "en-us"
+title = "Yale Critical History"
+theme = "showcase"
+disableKinds = ["taxonomy", "taxonomyTerm", "RSS"]
+
+[params]
+  author = "Yale Critical History"
+  message = ""
+  description = ""
+  hideAutoMenu = false
+
+[[menu.main]]
+  name = "External"
+  url = "#"
+
+[social]
+  facebook = "https://facebook.com"
