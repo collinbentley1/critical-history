@@ -1,0 +1,5 @@
+  <h2>yellow title</h2>
+  <p class="subtitle"> Check out our <strong>blog</strong>!</p>
+  {{ range where site.RegularPages "Type" "blog_posts" }}
+  <a href="{{ .Permalink }}">{{ .Title }}</a>
+  {{ end }}

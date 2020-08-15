@@ -1,0 +1,37 @@
+
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" id="map">
+  </div>
+</section>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiY29sbGluYmVudGxleTEiLCJhIjoiY2tkdjM1dzZwMHYweTJ1bWMyYW5iMndjMiJ9.s7fIIKKYqyWt0wO-nbrZTA';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3', // stylesheet location
+    //center: [-74.5, 40], // starting position [lng, lat]
+    //zoom: 9 // starting zoom
+  });
+</script>
+
+<!-- TODO: -->
+
+<!-- USE THIS https://docs.mapbox.com/mapbox-gl-js/example/scroll-fly-to/ -->
+
+
+<!-- and make sure to structure the place name and story as editable by markdown like in tutorial
+AND ideally use pipeline / ESBuild to update the var chapters array for mapbox -->
+
+<!-- when mobile, move story to bottom of the screen -->
+
+<!-- Start over button -->
+
+<!-- Hides to say Start Tour as a rounded button when click tour X -->
+
+<!-- Tooltip POI points for tour stops -->
+
+<!-- Add about page and report issue -->
+
+<!-- NetlifyCMS -->
+
+<!-- Add ability for photo/video/sound to play as popover (dim screen) and be added using markdown -->
