@@ -1,22 +1,83 @@
+<!-- 
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" id="map">
+
+  </div>
+</section> -->
+
+<style>
+  #features {
+  }
+  section.active {
+/*    overflow-y: scroll;
+*/    opacity: 1;
+  }
+  .box-item {
+    opacity: .1;
+  }
+  section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+  }
+  p {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+#stiles_marker {
+  background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+</style>
+
+<div id ="modal" class="modal">
+                  <div class="modal-background"></div>
+                  <div class="modal-content">
+                    <p class="image is-4by3">
+                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+                    </p>
+                  </div>
+                  <button class="modal-close is-large" aria-label="close"></button>
+                </div>
 
 <section class="hero is-fullheight-with-navbar">
   <div class="hero-body" id="map">
   </div>
+  <div class="level">
+    <div class="level-left"></div>
+    <div class="level-right is-overlay px-6">
+      <div class="level-item">
+        <div class="box" id="box">
+          <div id="features">
+            {{ range where site.RegularPages "Type" "locations" }}
+              <section id="{{ .Params.Simple }}" class="{{ if .Params.Status }}active{{ else }}box-item{{ end }}">
+                <h3>{{ .Title }}</h3>
+                {{ if .Params.Image }}
+                  <div class="image-credit-wrapper">
+                    <span class="image-credit">{{ .Params.Image_Credit }}</span>
+                    <img src="{{ .Params.Image }}" alt=" {{ .Params.Image_Alt }}">
+                  </div>
+                {{ end }}
+                {{ .Content }}
+              </section>
+              <hr class="navbar-divider">                  
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoiY29sbGluYmVudGxleTEiLCJhIjoiY2tkdjM1dzZwMHYweTJ1bWMyYW5iMndjMiJ9.s7fIIKKYqyWt0wO-nbrZTA';
-  var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3', // stylesheet location
-    //center: [-74.5, 40], // starting position [lng, lat]
-    //zoom: 9 // starting zoom
-  });
-</script>
+{{ $path := "js/map-locations.js" }}
+{{ $js := resources.Get $path | resources.ExecuteAsTemplate $path . | minify }}
+<script>{{ $js.Content | safeJS }}</script>
 
 <!-- TODO: -->
-
-<!-- USE THIS https://docs.mapbox.com/mapbox-gl-js/example/scroll-fly-to/ -->
 
 
 <!-- and make sure to structure the place name and story as editable by markdown like in tutorial
@@ -28,7 +89,10 @@ AND ideally use pipeline / ESBuild to update the var chapters array for mapbox -
 
 <!-- Hides to say Start Tour as a rounded button when click tour X -->
 
-<!-- Tooltip POI points for tour stops -->
+<!-- Tooltip POI points for tour stops https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/
+NOTE: these need to be automatically added by Markdown!! -->
+
+<!-- Will have a little intro as the first scroll pane, and ask users to scroll down to start tour -->
 
 <!-- Add about page and report issue -->
 

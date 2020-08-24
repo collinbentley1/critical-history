@@ -14,3 +14,6 @@ title = "Yale Critical History"
 
 [social]
   facebook = "https://facebook.com"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
