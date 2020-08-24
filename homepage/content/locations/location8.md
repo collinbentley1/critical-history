@@ -4,13 +4,12 @@ simple: sae_fraternity
 image: /images/sae-fraternity.jpg
 image_alt:
 image_credit: Ken Yanagisawa / YDN
+status:
 bearing: 119.2
-center:
-  - -72.9307157
-  - 41.3071148
-marker: 
-  - -72.930670
-  - 41.307210
+center_long: -72.9307157
+center_lat: 41.3071148
+marker_long: -72.930670
+marker_lat: 41.307210
 pitch: 20
 speed: .25
 zoom: 19.32

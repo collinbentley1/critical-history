@@ -4,13 +4,13 @@ simple: new_haven_green_phelps_gate
 image: /images/new-haven-green.jpg
 image_alt:
 image_credit: Nancy Kennedy / Getty Images
+status:
 bearing: 172
-center:
-  - -72.928464
-  - 41.308225
-marker: 
-  - -72.927987
-  - 41.308345
+center_long: -72.928464
+center_lat: 41.308225
+marker_long: -72.927987
+marker_lat: 41.308345
+pitch:
 speed: .25
 zoom: 17.14
 ---

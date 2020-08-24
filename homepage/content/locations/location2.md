@@ -4,13 +4,12 @@ simple: stiles
 image: /images/stiles.jpg
 image_alt:
 image_credit: Stephen Pitti
+status:
 bearing: 167.2
-center:
-  - -72.931131
-  - 41.312465
-marker: 
-  - -72.930883
-  - 41.312457
+center_long: -72.931131
+center_lat: 41.312465
+marker_long: -72.930883
+marker_lat: 41.312457
 pitch: 0
 speed: .3
 zoom: 17.85

@@ -4,13 +4,12 @@ simple: broadway_the_shops_at_yale
 image: /images/broadway.jpg
 image_alt:
 image_credit: Shutterstock
+status:
 bearing: -9.6
-center:
-  - -72.929498
-  - 41.311651
-marker: 
-  - -72.930126
-  - 41.311541
+center_long: -72.929498
+center_lat: 41.311651
+marker_long: -72.930126
+marker_lat: 41.311541
 pitch: 40
 speed: 0.1
 zoom: 17.38

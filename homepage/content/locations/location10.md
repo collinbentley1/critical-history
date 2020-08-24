@@ -4,13 +4,12 @@ simple: yale_police_department
 image: /images/yale-police-department.jpg
 image_alt:
 image_credit: Christian Abraham / Hearst CT Media
+status:
 bearing: -61.6
-center:
-  - -72.928562
-  - 41.316253
-marker: 
-  - -72.928712
-  - 41.315918
+center_long: -72.928562
+center_lat: 41.316253
+marker_long: -72.928712
+marker_lat: 41.315918
 pitch: 20
 speed: 0.4
 zoom: 18.39

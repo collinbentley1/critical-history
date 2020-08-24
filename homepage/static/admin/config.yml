@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: map # Branch to update (optional; defaults to master)
+publish_mode: editorial_workflow
+media_folder: "static/images" # Media files will be stored in the repo under static/images/uploads
+public_folder: "/images" # The src attribute for uploaded media will begin with /images/uploads
+collections:
+  - name: "locations" # Used in routes, e.g., /admin/collections/blog
+    label: "Locations" # Used in the UI
+    folder: "content/locations" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Location Name", name: "title", widget: "string"}
+      - {label: "Short Name", name: "simple", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Image Alt", name: "image_alt", widget: "string"}
+      - {label: "Image Credit", name: "image_credit", widget: "string"}
+      - {label: "Status", name: "status", widget: "string"}
+      - {label: "Bearing", name: "bearing", widget: "number", valueType: "float"}
+      - {label: "Center Longitude", name: "center_long", widget: "number", valueType: "float"}
+      - {label: "Center Latitude", name: "center_lat", widget: "number", valueType: "float"}
+      - {label: "Marker Longitude", name: "marker_long", widget: "number", valueType: "float"}
+      - {label: "Marker Latitude", name: "marker_lat", widget: "number", valueType: "float"}
+      - {label: "Pitch", name: "pitch", widget: "number", valueType: "float"}
+      - {label: "Speed", name: "speed", widget: "number", valueType: "float"}
+      - {label: "Zoom", name: "zoom", widget: "number", valueType: "float"}

@@ -4,13 +4,12 @@ simple: cross_campus
 image: /images/cross-campus.jpg
 image_alt:
 image_credit: Alex Zhang / YDN
+status:
 bearing: -61.6
-center:
-  - -72.927405
-  - 41.310904
-marker: 
-  - -72.927647
-  - 41.310691
+center_long: -72.927405
+center_lat: 41.310904
+marker_long: -72.927647
+marker_lat: 41.310691
 pitch: 20
 speed: .23
 zoom: 17.8

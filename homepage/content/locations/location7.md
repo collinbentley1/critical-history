@@ -4,13 +4,12 @@ simple: grace_hopper
 image: /images/grace-hopper.jpg
 image_alt:
 image_credit: Surbhi Bharadwaj / YDN
+status:
 bearing: 172
-center:
-  - -72.927613
-  - 41.309938
-marker: 
-  - -72.927177
-  - 41.309967
+center_long: -72.927613
+center_lat: 41.309938
+marker_long: -72.927177
+marker_lat: 41.309967
 pitch: 40
 speed: .13
 zoom: 18.08

@@ -6,12 +6,10 @@ image_alt:
 image_credit: Kristina Kim / YDN
 status: active
 bearing: 0
-center:
-  - -72.9312285
-  - 41.3070808
-marker: 
-  - -72.931415
-  - 41.306982
+center_long: -72.9312285
+center_lat: 41.3070808
+marker_long: -72.931415
+marker_lat: 41.306982
 pitch: 20
 speed: .3
 zoom: 18.92

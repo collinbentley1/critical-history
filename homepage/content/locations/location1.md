@@ -1,10 +1,17 @@
 ---
 title: Introduction
 simple: introduction
+image:
+image_alt:
+image_credit:
+status:
 bearing: 0
-center:
-  - -72.92504
-  - 41.31171
+center_long: -72.92504
+center_lat: 41.31171
+marker_long:
+marker_lat:
+pitch:
+speed:
 zoom: 17.85
 ---
 

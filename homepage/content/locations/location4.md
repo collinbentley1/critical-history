@@ -4,13 +4,13 @@ simple: the_house
 image: /images/the-house.jpg
 image_alt:
 image_credit: Irene Jiang / YDN
+status:
 bearing: 155.2
-center:
-  - -72.9329838
-  - 41.3093089
-marker: 
-  - -72.932876
-  - 41.309407
+center_long: -72.9329838
+center_lat: 41.3093089
+marker_long: -72.932876
+marker_lat: 41.309407
+pitch:
 speed: .3
 zoom: 18.99
 ---
