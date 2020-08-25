@@ -24,84 +24,6 @@ var chapters = {
   }{{ if eq (add $index 1) $locations_count }}{{ else }},{{ end }}{{ end }}
 };
 
-// var chapters = {
-//   'introduction': {
-//     bearing: 0,
-//     center: [-72.92504, 41.31171],
-//     zoom: 14.66,
-//   },
-//   'stiles': {
-//     speed: .3,
-//     center: [-72.931131, 41.312465],
-//     marker:[-72.930883, 41.312457], 
-//     bearing: 167.2,
-//     zoom: 17.85,
-//     pitch: 0
-//   },
-//   'broadway_the_shops_at_yale': {
-//     bearing: -9.6,
-//     center: [-72.929498, 41.311651],
-//     marker:[-72.930126, 41.311541], 
-//     zoom: 17.38,
-//     speed: 0.1,
-//     pitch: 40
-//   },
-//   'the_house': {
-//     bearing: 155.2,
-//     speed: .3,
-//     center: [-72.9329838, 41.3093089],
-//     marker:[-72.932876, 41.309407], 
-//     zoom: 18.99
-//   },
-//   'aacc_la_casa_cultural_nacc': {
-//     bearing: 0,
-//     center: [-72.9312285, 41.3070808],
-//     marker:[-72.931415, 41.306982], 
-//     zoom: 18.92,
-//     pitch: 20,
-//     speed: 0.3
-//   },
-//   'new_haven_green_phelps_gate': {
-//     bearing: 172,
-//     center: [-72.928464, 41.308225],
-//     marker:[-72.927987, 41.308345], 
-//     zoom: 17.14,
-//     speed: 0.25
-//   },
-//   'grace_hopper': {
-//     bearing: 172,
-//     center: [-72.927613, 41.309938],
-//     marker:[-72.927177, 41.309967], 
-//     zoom: 18.08,
-//     pitch: 40,
-//     speed: .13
-//   },
-//   'sae_fraternity': {
-//     bearing: 119.2,
-//     center: [-72.9307157, 41.3071148],
-//     marker:[-72.930670, 41.307210], 
-//     zoom: 19.32,
-//     pitch: 20,
-//     speed:0.25
-//   },
-//   'cross_campus': {
-//     bearing: -61.6,
-//     center: [-72.927405, 41.310904],
-//     marker:[-72.927647, 41.310691], 
-//     zoom: 17.8,
-//     pitch: 20,
-//     speed: 0.23
-//   },
-//   'yale_police_department': {
-//     bearing: -61.6,
-//     center: [-72.928562, 41.316253],
-//     marker:[-72.928712, 41.315918], 
-//     speed: 0.4,
-//     zoom: 18.39,
-//     pitch: 20
-//   }        
-// };
-
 // Get chapters
 var chapterNames = Object.keys(chapters);
 
@@ -111,9 +33,10 @@ for (var i = 0; i < chapterNames.length; i++) {
   // Create DOM element for marker
   if (chapters[chapterName].hasOwnProperty('marker')) {
     var el = document.createElement('div');
-    el.id = chapterName + '_marker';
+    el.className = 'marker';
+    console.log(el.id);
     // Add marker to map
-    var marker = new mapboxgl.Marker()
+    var marker = new mapboxgl.Marker(el)
       .setLngLat(chapters[chapterName].marker)
       .addTo(map);
   }
