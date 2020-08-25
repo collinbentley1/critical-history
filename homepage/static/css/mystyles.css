@@ -22,6 +22,14 @@
   right: 0;
 }
 
+.navbar-brand {
+  color: #605856;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 1.1em;
+  padding-left: 8px;
+}
+
 .box {
   overflow-y: scroll;
   max-width: 400px;
@@ -31,10 +39,10 @@
 .box h3 {
   color: #605856;
   font-family: "Roboto";
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.3em;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 8px;
+  padding-bottom: 20px;
 }
 
 /*! bulma.io v0.9.0 | MIT License | github.com/jgthms/bulma */

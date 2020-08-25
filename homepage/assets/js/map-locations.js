@@ -13,7 +13,7 @@ map.on('load', function () {
 var chapters = {
 {{ $locations := (where site.RegularPages "Type" "locations") }}
 {{ $locations_count := (len $locations) }}
-{{ range $index, $element := $locations }}
+{{ range $index, $element := sort $locations ".Params.Order" }}
   '{{ .Params.Simple }}': {
     {{ if .Params.Bearing }}bearing: {{ .Params.Bearing }},{{ end }}
     {{ if .Params.Center_Long }}center: [{{ .Params.Center_Long }}, {{ .Params.Center_Lat }}],{{ end }}

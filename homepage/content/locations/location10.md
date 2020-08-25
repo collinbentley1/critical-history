@@ -1,6 +1,7 @@
 ---
 title: Yale Police Department
 simple: yale_police_department
+order: 10
 image: /images/yale-police-department.jpg
 image_alt:
 image_credit: Christian Abraham / Hearst CT Media

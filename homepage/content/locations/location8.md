@@ -1,6 +1,7 @@
 ---
 title: SAE Fraternity
 simple: sae_fraternity
+order: 8
 image: /images/sae-fraternity.jpg
 image_alt:
 image_credit: Ken Yanagisawa / YDN

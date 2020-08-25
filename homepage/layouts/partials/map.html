@@ -46,8 +46,8 @@
       <div class="level-item">
         <div class="box" id="box">
           <div id="features">
-            {{ range where site.RegularPages "Type" "locations" }}
-              <section id="{{ .Params.Simple }}" class="{{ if .Params.Status }}active{{ else }}box-item{{ end }}">
+            {{ range sort (where site.RegularPages "Type" "locations") ".Params.Order"}}
+              <section id="{{ .Params.Simple }}" class="{{ if eq .Params.Status "active" }}active{{ else }}box-item{{ end }}">
                 <h3>{{ .Title }}</h3>
                 {{ if .Params.Image }}
                   <div class="image-credit-wrapper">

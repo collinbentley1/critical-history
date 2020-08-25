@@ -11,8 +11,9 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter.
-      - {label: "Locations Name", name: "title", widget: "string"}
+      - {label: "Location Name", name: "title", widget: "string"}
       - {label: "Short Name", name: "simple", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", valueType: "int"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Image Alt", name: "image_alt", widget: "string", required: false}
       - {label: "Image Credit", name: "image_credit", widget: "string", required: false}

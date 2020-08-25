@@ -1,6 +1,7 @@
 ---
 title: Broadway (The Shops at Yale)
 simple: broadway_the_shops_at_yale
+order: 3
 image: /images/broadway.jpg
 image_alt:
 image_credit: Shutterstock

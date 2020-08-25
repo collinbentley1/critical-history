@@ -1,6 +1,7 @@
 ---
 title: Stiles
 simple: stiles
+order: 2
 image: /images/stiles.jpg
 image_alt:
 image_credit: Stephen Pitti
