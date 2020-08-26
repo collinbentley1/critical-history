@@ -1,12 +1,12 @@
 backend:
   name: git-gateway
-  branch: map # Branch to update (optional; defaults to master)
+  branch: master # Branch to update (optional; defaults to master)
 publish_mode: editorial_workflow
 media_folder: "/homepage/static/images" # Media files will be stored in the repo under static/images/uploads
-public_folder: "/homepage/images" # The src attribute for uploaded media will begin with /images/uploads
+public_folder: "/images" # The src attribute for uploaded media will begin with /images/uploads
 collections:
-  - name: "locations" # Used in routes, e.g., /admin/collections/blog
-    label: "Locations" # Used in the UI
+  - name: "location" # Used in routes, e.g., /admin/collections/blog
+    label: "Location" # Used in the UI
     folder: "/homepage/content/locations" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{fields.simple}}" # Filename template, e.g., YYYY-MM-DD-title.md
