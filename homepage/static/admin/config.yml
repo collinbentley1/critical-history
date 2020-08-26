@@ -9,7 +9,7 @@ collections:
     label: "Locations" # Used in the UI
     folder: "/homepage/content/locations" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    slug: "{{fields.simple}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter.
       - {label: "Location Name", name: "title", widget: "string"}
       - {label: "Short Name", name: "simple", widget: "string"}

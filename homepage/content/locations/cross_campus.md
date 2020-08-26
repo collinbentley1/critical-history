@@ -2,7 +2,7 @@
 title: Cross Campus
 simple: cross_campus
 order: 9
-image: /images/cross-campus.jpg
+image: /images/cross_campus.jpg
 image_alt:
 image_credit: Alex Zhang / YDN
 status:

@@ -2,7 +2,7 @@
 title: Grace Hopper
 simple: grace_hopper
 order: 7
-image: /images/grace-hopper.jpg
+image: /images/grace_hopper.jpg
 image_alt:
 image_credit: Surbhi Bharadwaj / YDN
 status:

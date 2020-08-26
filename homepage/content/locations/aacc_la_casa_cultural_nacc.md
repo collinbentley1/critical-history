@@ -2,7 +2,7 @@
 title: AACC, La Casa Cultural, NACC
 simple: aacc_la_casa_cultural_nacc
 order: 5
-image: /images/aacc.jpg
+image: /images/aacc_la_casa_cultural_nacc.jpg
 image_alt:
 image_credit: Kristina Kim / YDN
 status:

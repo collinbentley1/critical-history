@@ -2,7 +2,7 @@
 title: The House
 simple: the_house
 order: 4
-image: /images/the-house.jpg
+image: /images/the_house.jpg
 image_alt:
 image_credit: Irene Jiang / YDN
 status:

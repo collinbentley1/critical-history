@@ -2,7 +2,7 @@
 title: New Haven Green / Phelps Gate
 simple: new_haven_green_phelps_gate
 order: 6
-image: /images/new-haven-green.jpg
+image: /images/new_haven_green_phelps_gate.jpg
 image_alt:
 image_credit: Nancy Kennedy / Getty Images
 status:
