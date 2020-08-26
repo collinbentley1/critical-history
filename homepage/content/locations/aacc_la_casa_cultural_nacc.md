@@ -1,0 +1,21 @@
+---
+title: AACC, La Casa Cultural, NACC
+simple: aacc_la_casa_cultural_nacc
+order: 5
+image: /images/aacc_la_casa_cultural_nacc.jpg
+image_alt:
+image_credit: Kristina Kim / YDN
+status:
+bearing: 0.01
+center_long: -72.9312285
+center_lat: 41.3070808
+marker_long: -72.931415
+marker_lat: 41.306982
+pitch: 20
+speed: .3
+zoom: 18.92
+---
+
+The four cultural centers have distinct histories. But the three on High Street have particularly interrelated stories. The Asian American Cultural Center, or the AACC, was formed when Asian American students lobbied for this space in the fall of 1978, through a meeting with the Yale President that alumni recall fondly as “Shoe Day.” At the time, the Asian American Students’ Alliance had been meeting in an office in the basement of Bingham, and asked the President to meet with them there so they could show him how small it was. Before the meeting, all the students took their shoes off—a common cultural practice in Asian homes—and left them out in the hallway. When President A. Bartlett Giamatti came down to the Bingham basement, he was greeted by a sea of at least 100 shoes leading to the door of the small office. Within the year, the President [began meeting with students](https://downatyale.com/aacc-oral-histories-grant-din/) to create a new space. 
+
+In 1981, the AACC was established in its current location, where for years it housed Asian American and Chicanx students together. In 1993, the top floor became the Native American Cultural Center. Four years later Chicanx students joined Puerto Rican students to officially form Casa Boricua next door. In 2002, Chicanx students joined Casa Boricua and the center was renamed and officially established as La Casa Cultural. The mural painted on the side wall of La Casa represents the merging of Chicanx and Puerto Rican identities. Native American and Asian American students continued to share the house at 295 Crown Street until 2013, when the Native American Cultural Center opened next door.

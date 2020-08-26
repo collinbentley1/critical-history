@@ -1,0 +1,28 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class = "navbar-item" href="/">{{ .Site.Title }}</a>
+    <!-- Mobile Menu -->
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+      <!-- Accessibility for three menu items -->
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <!-- Desktop Menu -->
+  <div id="navbarMain" class="navbar-menu">
+    <!-- Left side of menu -->
+    <div class="navbar-start">
+      <!-- Programatically add pages to menu -->
+      {{ range where .Site.RegularPages "Type" "page" }}
+        <a class="navbar-item" href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ end }}
+    </div>
+    <!-- Right side of menu -->
+    <div class="navbar-end">
+      <div class="navbar-item">
+            <a class="button is-outlined typeform-share link" href="https://form.typeform.com/to/fgEAT2ps" data-mode="popup" data-hide-headers=true data-hide-footer=true target="_blank">Contact Us </a>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,80 @@
+<style>
+  #features {
+  }
+  section.active {
+/*    overflow-y: scroll;
+*/    opacity: 1;
+  }
+  .box-item {
+    opacity: .1;
+  }
+  section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+  }
+  p {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+#stiles_marker {
+  background-image: url('https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.marker {
+  background-image: url('/images/marker.png');
+  background-size: cover;
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+</style>
+
+<!-- <div id ="modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <p class="image is-4by3">
+      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
+    </p>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div> -->
+
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" id="map">
+  </div>
+  <div class="level">
+    <div class="level-left"></div>
+    <div class="level-right is-overlay px-6">
+      <div class="level-item">
+        <div class="box" id="box">
+          <div id="features">
+            {{ range sort (where site.RegularPages "Type" "locations") ".Params.Order"}}
+              <section id="{{ .Params.Simple }}" class="{{ if eq .Params.Status "active" }}active{{ else }}box-item{{ end }}">
+                <h3>{{ .Title }}</h3>
+                {{ if .Params.Image }}
+                  <div class="image-credit-wrapper">
+                    <span class="image-credit">{{ .Params.Image_Credit }}</span>
+                    <img src="{{ .Params.Image }}" alt=" {{ .Params.Image_Alt }}">
+                  </div>
+                {{ end }}
+                {{ .Content }}
+              </section>
+              <hr class="navbar-divider">                  
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ $path := "js/map-locations.js" }}
+{{ $js := resources.Get $path | resources.ExecuteAsTemplate $path . | minify }}
+<script>{{ $js.Content | safeJS }}</script>
