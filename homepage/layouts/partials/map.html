@@ -1,6 +1,5 @@
 <style>
-  #features {
-  }
+
   section.active {
 /*    overflow-y: scroll;
 */    opacity: 1;
@@ -54,7 +53,6 @@
     <div class="level-right is-overlay px-6">
       <div class="level-item">
         <div class="box" id="box">
-          <div id="features">
             {{ range sort (where site.RegularPages "Type" "locations") ".Params.Order"}}
               <section id="{{ .Params.Simple }}" class="{{ if eq .Params.Status "active" }}active{{ else }}box-item{{ end }}">
                 <h3>{{ .Title }}</h3>
@@ -65,10 +63,9 @@
                   </div>
                 {{ end }}
                 {{ .Content }}
-              </section>
               <hr class="navbar-divider">                  
+              </section>
             {{ end }}
-          </div>
         </div>
       </div>
     </div>
