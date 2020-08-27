@@ -1,6 +1,6 @@
 <style>
 
-section.active {
+/*section.active {
   opacity: 1;
   transition: opacity .25s ease-in-out;
   -moz-transition: opacity .25s ease-in-out;
@@ -31,7 +31,7 @@ p {
   width: 35px;
   height: 35px;
   cursor: pointer;
-}
+}*/
 
 </style>
 
@@ -53,6 +53,7 @@ p {
     <div class="level-right is-overlay px-6">
       <div class="level-item">
         <div class="box" id="box">
+            <a id="top"></a>
             {{ range sort (where site.RegularPages "Type" "locations") ".Params.Order"}}
               <section id="{{ .Params.Simple }}" class="{{ if eq .Params.Status "active" }}active{{ else }}box-item{{ end }}">
                 <h3>{{ .Title }}</h3>
@@ -66,6 +67,7 @@ p {
               <hr class="navbar-divider">                  
               </section>
             {{ end }}
+            <div id="top-button"><a class="button is-small is-fullwidth" href="#top">Back to Top</a></button></div>
         </div>
       </div>
     </div>

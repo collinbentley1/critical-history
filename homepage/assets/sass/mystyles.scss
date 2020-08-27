@@ -25,15 +25,48 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
+section.active {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+}
+
+.box-item {
+  opacity: .1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+}
+
+section:last-child {
+  border-bottom: none;
+  margin-bottom: 200px;
+}
+
+.marker {
+  background-image: url('/images/marker.png');
+  background-size: cover;
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
 .image-credit-wrapper {
   overflow: hidden;
   position: relative;
+  padding-top: .7em;
 }
 
 .image-credit-wrapper .image-credit {
   position: absolute;
   right: 0px;
   bottom: 0px;
+}
+
+.button {
+  border-width: 1px !important;
 }
 
 .image-credit {
@@ -59,6 +92,10 @@ $input-shadow: none;
   padding-right: 8px;
 }
 
+#top-button {
+    padding-top: .5em;
+  }
+
 .box {
   h3 {
     color: $primary;
@@ -66,7 +103,7 @@ $input-shadow: none;
     font-weight: 500;
     font-size: 1.3em;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     padding-left: 20px;
     position: sticky;
     position: -webkit-sticky;
@@ -75,6 +112,10 @@ $input-shadow: none;
     background-color: white;
     z-index: 1;
     margin-left: -20px;
+  }
+  p {
+    padding-top: .5em;
+    padding-bottom: .5em;
   }
   overflow-y:scroll;
   overflow-x: hidden;
