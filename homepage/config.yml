@@ -1,8 +1,8 @@
 baseURL: 'https://ycriticalhistory.org/'
 languageCode: en-us
-title: Yale Critical History Map
+title: Critical History Map
 params:
-  author: Yale Critical History Map
+  author: Critical History Map
   message: ''
   description: ''
   hideAutoMenu: false
