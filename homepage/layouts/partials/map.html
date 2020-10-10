@@ -53,7 +53,8 @@ p {
     <div class="level-right is-overlay px-6">
       <div class="level-item">
         <div class="box" id="box">
-            <a id="top"></a>
+          <a id="top"></a>
+          <a href="#top"><div class="close-icon is-overlay" href="#top" style="padding-left:345px; position:sticky; position:-webkit-sticky; padding-top: 12px; z-index:30;"><span class="iconify" style="" data-icon="oi-circle-x" data-inline="false" href="#top"></span></div></a>
             {{ range sort (where site.RegularPages "Type" "locations") ".Params.Order"}}
               <section id="{{ .Params.Simple }}" class="{{ if eq .Params.Status "active" }}active{{ else }}box-item{{ end }}">
                 <h3>{{ .Title }}</h3>
