@@ -1,0 +1,12 @@
+.modal-100w {
+    max-width: 70%;
+}
+
+.modal-backdrop.show {
+  opacity: 0.92;
+}
+
+.introduction-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SiteNav from './SiteNav';
 import WebFont from 'webfontloader';
+
+import './index.css';
+import App from './App';
 
 WebFont.load({
   google: {
@@ -15,7 +15,7 @@ WebFont.load({
 
 ReactDOM.render(
   <React.StrictMode>
-    <SiteNav />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

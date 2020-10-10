@@ -10,22 +10,22 @@ import './SiteNav.css'
 
 function SiteNav() {
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#home" className="brandName">
+    <Navbar bg='light' expand='lg' className="fixed-top">
+      <Navbar.Brand href='#home' className='brandName'>
         <img
           src={logo}
-          width="45"
-          height="45"
-          alt="React Bootstrap logo"
+          width='46'
+          height='46'
+          alt='Critical History Map logo'
         />
-        <a href="#home" class="ml-3">Critical History Map</a>
+        <a href='#home' className='ml-3'>Critical History Map</a>
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbar-nav" />
-      <Navbar.Collapse id="navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Link href="#about">About</Nav.Link>
-          <Nav.Link href="#about">Contribute</Nav.Link>
-          <Nav.Link href="#contact">Contact Us</Nav.Link>
+      <Navbar.Toggle aria-controls='navbar-nav' />
+      <Navbar.Collapse id='navbar-nav'>
+        <Nav className='ml-auto'>
+          <Nav.Link href='#about'>About</Nav.Link>
+          <Nav.Link href='#about'>Contribute</Nav.Link>
+          <Nav.Link href='#contact'>Contact Us</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

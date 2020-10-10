@@ -1,3 +1,22 @@
+## To-do
+
+* Proper display of carousel data
+* Single page for about
+* Link Contribute to TypeForm A
+* Link Contact Us to TypeForm B
+* Style Modal
+* Add function to Modal Buttons to determine mode
+* Create carousel display for explore mode (first interaction)
+* Use props to populate carousel
+* Use state to control map flying
+* Use state to control carousel when clicking on marker
+* Add back Netlify CMS
+* Update Typeform to ask for address
+* Create endpoint for Typeform data (Google Sheet)
+
+* Push to public domain
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
