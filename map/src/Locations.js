@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
+import locationData from './locationData.js'
+import './Locations.css'
 
 function Locations() {
   const [index, setIndex] = useState(0);
@@ -8,45 +10,24 @@ function Locations() {
     setIndex(selectedIndex);
   };
 
+  const locationComponents = locationData.map(function (location) { return(
+    <Carousel.Item>
+        <img
+          className="d-block w-450"
+          src={location.image}
+          alt={location.image_alt}
+        />
+        <Carousel.Caption>
+          <h3>{location.title}</h3>
+          <p>{location.simple}</p>
+          <p>{location.center}, {location.bearing}, {location.pitch}, {location.speed}, {location.zoom}</p>
+        </Carousel.Caption>
+    </Carousel.Item>
+  )});
+
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-        <img
-          className="d-block w-450"
-          src="/images/broadway_the_shops_at_yale.jpg"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-450"
-          src="/images/broadway_the_shops_at_yale.jpg"
-          alt="Second slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-450"
-          src="/images/broadway_the_shops_at_yale.jpg"
-          alt="Third slide"
-        />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+    <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+      {locationComponents}
     </Carousel>
     );
 }

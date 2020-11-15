@@ -45,11 +45,14 @@ class Map extends React.Component {
       // Create a DOM element for marker
       var el = document.createElement('div');
       el.className = 'marker';
-      // Add event listener on marker
+      // Add event listener on marker to adjust
+      // location carousel when marker is clicked
       el.addEventListener('click', () => {
         console.log(marker.title);
       });
       // Create popup for marker (when clicked)
+      // TODO: hover over marker to open / close markers
+      // TODO: styling for popup
       var popup = new mapboxgl.Popup({offset: 25})
         .setText(marker.title);
       // Add marker to the map
@@ -58,30 +61,7 @@ class Map extends React.Component {
         .setPopup(popup)
         .addTo(map);
     });
-
-    // for (var i = 0; i < this.state.locationData.length; i++) {
-    //   var location = this.state.locationData[i];
-    //   if (location.hasOwnProperty('marker')) {
-    //     // Create virtual DOM element for marker
-    //     var el = document.createElement('div');
-    //     el.className = 'marker';
-    //     // Create popup for marker (when hovered or clicked)
-    //     var popup = new mapboxgl.Popup({offset: 25})
-    //       .setText(location.title);
-    //     // Set location and popup and add Marker to map
-    //     var marker = new mapboxgl.Marker(el)
-    //       .setLngLat(location.marker)
-    //       .setPopup(popup)
-    //       .addTo(map);
-    //     // Add event listener to marker
-    //     el. addEventListener('click', () => {
-    //       console.log(location.title, ' clicked.');
-    //     });
-    //   }
-    // }
   }
-
-
 
   render () {
     return (
