@@ -2,8 +2,8 @@
 
 * Proper display of carousel data
 * Single page for about
-* Link Contribute to TypeForm A
-* Link Contact Us to TypeForm B
+* Link "Add Location" to TypeForm A
+* Link "Contact Us" to TypeForm B
 * Style Modal
 * Add function to Modal Buttons to determine mode
 * Create carousel display for explore mode (first interaction)

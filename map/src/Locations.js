@@ -12,8 +12,8 @@ function Locations() {
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
+          className="d-block w-450"
+          src="/images/broadway_the_shops_at_yale.jpg"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -23,8 +23,8 @@ function Locations() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
+          className="d-block w-450"
+          src="/images/broadway_the_shops_at_yale.jpg"
           alt="Second slide"
         />
 
@@ -35,8 +35,8 @@ function Locations() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
+          className="d-block w-450"
+          src="/images/broadway_the_shops_at_yale.jpg"
           alt="Third slide"
         />
 
