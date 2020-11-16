@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import './Map.css';
 import locationData from './locationData.js';
+import ReactMarkdown from 'react-markdown'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
  // React and Mapbox can be confusing to use together at first
@@ -87,13 +88,9 @@ const Map = () => {
                                   />
                                   <Carousel.Caption>
                                     <h3>{location.title}</h3>
-                                    <p>{location.simple}</p>
-                                    <p>{location.center},
-                                       {location.bearing},
-                                       {location.pitch},
-                                       {location.speed},
-                                       {location.zoom}
-                                    </p>
+                                    <ReactMarkdown 
+                                        source={location.text}
+                                        renderers={{link: LinkRenderer}}/>
                                   </Carousel.Caption>
                               </Carousel.Item>
                               )});
@@ -105,12 +102,17 @@ const Map = () => {
     map.current.flyTo(newLocation)
   }, [index]);
 
+  // Link renderer: allow links to open in new tab
+  function LinkRenderer(props) {
+    return <a href={props.href} target="_blank">{props.children}</a>
+  }
+
   return (
       <Container fluid className="h-100">
           <Row className="h-100">
             <Col xs lg="7" className="bg-gray text-white mt-5 pt-4 pl-0">
               <div className="map-wrapper">
-                <div ref={mapContainerRef} className="map-container"/>
+                <div ref={mapContainerRef} className="map"/>
               </div>
             </Col>
             <Col xs lg="5" className="mt-5 pt-4">
