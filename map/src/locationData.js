@@ -2,7 +2,7 @@ const locationData = [
     {
       "title": "AACC, La Casa Cultural, NACC",
       "simple": "aacc_la_casa_cultural_nacc",
-      "id": 4,
+      "id": 3,
       "image": "/images/aacc_la_casa_cultural_nacc.jpg",
       "image_alt": null,
       "image_credit": "Kristina Kim / YDN",
@@ -17,7 +17,7 @@ const locationData = [
     {
       "title": "Broadway (The Shops at Yale)",
       "simple": "broadway_the_shops_at_yale",
-      "id": 2,
+      "id": 1,
       "image": "/images/broadway_the_shops_at_yale.jpg",
       "image_alt": null,
       "image_credit": "Shutterstock",
@@ -32,7 +32,7 @@ const locationData = [
     {
       "title": "Cross Campus",
       "simple": "cross_campus",
-      "id": 8,
+      "id": 7,
       "image": "/images/cross_campus.jpg",
       "image_alt": null,
       "image_credit": "Alex Zhang / YDN",
@@ -47,7 +47,7 @@ const locationData = [
     {
       "title": "Grace Hopper",
       "simple": "grace_hopper",
-      "id": 6,
+      "id": 5,
       "image": "/images/grace_hopper.jpg",
       "image_alt": null,
       "image_credit": "Surbhi Bharadwaj / YDN",
@@ -62,7 +62,7 @@ const locationData = [
     {
       "title": "New Haven Green / Phelps Gate",
       "simple": "new_haven_green_phelps_gate",
-      "id": 5,
+      "id": 4,
       "image": "/images/new_haven_green_phelps_gate.jpg",
       "image_alt": null,
       "image_credit": "Nancy Kennedy / Getty Images",
@@ -77,7 +77,7 @@ const locationData = [
     {
       "title": "SAE Fraternity",
       "simple": "sae_fraternity",
-      "id": 7,
+      "id": 6,
       "image": "/images/sae_fraternity.jpg",
       "image_alt": null,
       "image_credit": "Ken Yanagisawa / YDN",
@@ -92,7 +92,7 @@ const locationData = [
     {
       "title": "Stiles",
       "simple": "stiles",
-      "id": 1,
+      "id": 0,
       "image": "/images/stiles.jpg",
       "image_alt": null,
       "image_credit": "Stephen Pitti",
@@ -107,7 +107,7 @@ const locationData = [
     {
       "title": "The House",
       "simple": "the_house",
-      "id": 3,
+      "id": 2,
       "image": "/images/the_house.jpg",
       "image_alt": null,
       "image_credit": "Irene Jiang / YDN",
@@ -122,7 +122,7 @@ const locationData = [
     {
       "title": "Yale Police Department",
       "simple": "yale_police_department",
-      "id": 9,
+      "id": 8,
       "image": "/images/yale_police_department.jpg",
       "image_alt": null,
       "image_credit": "Christian Abraham / Hearst CT Media",

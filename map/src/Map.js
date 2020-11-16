@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Map.css'
 import locationData from './locationData.js'
+import MapContext from './mapContext'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -20,7 +21,6 @@ class Map extends React.Component {
     }
   }
 
-
   // React and Mapbox can be confusing to use together at first
   // because they both have state and modify a virtual DOM.
   // If you're familiar with React, you might be tempted to use
@@ -29,53 +29,78 @@ class Map extends React.Component {
   // state. The equivalent is using map.on('event', () => {})
 
   componentDidMount() {
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3',
-      center: [this.state.currentLoc.lng, this.state.currentLoc.lat],
-      zoom: this.state.currentLoc.zoom
-    });
+    this.initializeMap();
 
-    // DEBUG: Logs map location, zoom, and bearing
-    map.on('render', function() {
-      console.log(map.getBearing(), map.getZoom(), map.getCenter());
-    });
+    // //console.log(map)
 
-    locationData.forEach(marker => {
-      // Create a DOM element for marker
-      var el = document.createElement('div');
-      el.className = 'marker';
-      // Add event listener on marker to adjust
-      // location carousel when marker is clicked
-      el.addEventListener('click', () => {
-        console.log(marker.title);
-      });
-      // Create popup for marker (when clicked)
-      // TODO: hover over marker to open / close markers
-      // TODO: styling for popup
-      var popup = new mapboxgl.Popup({offset: 25})
-        .setText(marker.title);
-      // Add marker to the map
-      new mapboxgl.Marker(el)
-        .setLngLat(marker.marker)
-        .setPopup(popup)
-        .addTo(map);
-    });
+    // // DEBUG: Logs map location, zoom, and bearing
+    // this.map.on('render', function() {
+    //   //console.log(map.getBearing(), map.getZoom(), map.getCenter());
+    // });
+
+    // locationData.forEach(marker => {
+    //   // Create a DOM element for marker
+    //   var el = document.createElement('div');
+    //   el.className = 'marker';
+    //   // Add event listener on marker to adjust
+    //   // location carousel when marker is clicked
+    //   el.addEventListener('click', () => {
+    //     console.log(marker.title, marker.id);
+    //   });
+    //   // Create popup for marker (when clicked)
+    //   // TODO: hover over marker to open / close markers
+    //   // TODO: styling for popup
+    //   var popup = new mapboxgl.Popup({offset: 25})
+    //     .setText(marker.title);
+    //   // Add marker to the map
+    //   new mapboxgl.Marker(el)
+    //     .setLngLat(marker.marker)
+    //     .setPopup(popup)
+    //     .addTo(this.map);
+    // }
+    // );
   }
+
+    initializeMap() {
+      const accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+      this.map = new mapboxgl.Map({
+        container: this.mapContainer,
+        style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3',
+        center: [this.state.currentLoc.lng, this.state.currentLoc.lat],
+        zoom: this.state.currentLoc.zoom,
+        accessToken,
+      });
+
+      this.map.on('load', async() => {
+        setStyle(this.map.getStyle());
+      });
+    }
+
+
+                  //   <MapContext.Provider value={this.map}>
+                  //   {this.map && <Locations />}
+                  // </MapContext.Provider>
 
   render () {
     return (
       <Container fluid className="h-100">
           <Row className="h-100">
             <Col xs lg="7" className="bg-gray text-white mt-5 pt-4 pl-0">
-              <div className="map-wrapper">
-                <div ref={el => this.mapContainer = el} className="map-container"/>
+              <div className="mapWrapper" id="mapWrapper">
+                <div ref={(el) => {
+                        this.mapContainer = el;
+                      }} 
+                      className="map"
+                      id="map"
+                />
               </div>
             </Col>
             <Col xs lg="5" className="mt-5 pt-4">
               <div className="h-100 d-flex flex-column">
                 <Row className="justify-content-center flex-grow-1 bg-purple">
-                  <Locations />
+                  <MapContext.Provider value={this.map}>
+                    {this.map && <Locations />}
+                  </MapContext.Provider>
                 </Row>
               </div>
             </Col>            
