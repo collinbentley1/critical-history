@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import './Introduction.css'
-import logo from './logo.svg'
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import './Introduction.css';
+import logo from './logo.svg';
 
 function Introduction() {
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   return (
     <Modal 

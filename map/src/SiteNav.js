@@ -1,13 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
-import logo from './logo.svg'
-import './SiteNav.css'
-import * as typeformEmbed from '@typeform/embed'
+import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import logo from './logo.svg';
+import './SiteNav.css';
+import * as typeformEmbed from '@typeform/embed';
 
 // Create popup instance of Typeform
 // Note: this could be done inside the component function
@@ -31,7 +27,7 @@ function SiteNav() {
           height='46'
           alt='Critical History Map logo'
         />
-        <a href='#' className='ml-3'>Critical History Map</a>
+        <a href='/' className='ml-3'>Critical History Map</a>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='navbar-nav' />
       <Navbar.Collapse id='navbar-nav'>

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const locationData = [ 
     {
       "title": "AACC, La Casa Cultural, NACC",

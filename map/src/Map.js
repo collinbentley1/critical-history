@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import Locations from './Locations';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -104,7 +103,7 @@ const Map = () => {
 
   // Link renderer: allow links to open in new tab
   function LinkRenderer(props) {
-    return <a href={props.href} target="_blank">{props.children}</a>
+    return <a href={props.href} target="_blank" rel="noopener noreferrer">{props.children}</a>
   }
 
   return (
