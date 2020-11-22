@@ -8,7 +8,7 @@ function Introduction() {
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
-
+  
   return (
     <Modal 
       show={show} 

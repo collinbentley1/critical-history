@@ -13,6 +13,7 @@ const typeform = typeformEmbed.makePopup('https://cdbentley.typeform.com/to/fgEA
       open: 'scroll',
       openValue: 30,
       autoClose: 3,
+      autoOpen: false,
       hideScrollbars: true,
     });
 
