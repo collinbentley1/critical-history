@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './Introduction.css';
 import logo from './logo.svg';
+import GuidedContext from "./guided-context";
 
 function Introduction() {
   const [show, setShow] = useState(true);
-
   const handleClose = () => setShow(false);
+
+  // Use the context created by App.js
+  const { guided, setGuided } = useContext(GuidedContext);
+  const handleGuided = () => {
+    setGuided(true);
+    setShow(false);
+  }
   
   return (
     <Modal 
@@ -32,7 +39,7 @@ function Introduction() {
         <Button variant='secondary' onClick={handleClose}>
         Explore 
         </Button>
-        <Button variant='primary' onClick={handleClose}>
+        <Button variant='primary' onClick={handleGuided}>
         Guided Tour
         </Button>
       </Modal.Footer>

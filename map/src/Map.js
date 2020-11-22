@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -6,7 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import './Map.css';
 import locationData from './locationData.js';
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
+import GuidedContext from './guided-context';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
  // React and Mapbox can be confusing to use together at first
@@ -60,6 +61,10 @@ const Map = () => {
     return () => map.current.remove();
   }, []);  // [] in useEffect mimics componentDidMount(); (will run only once)
 
+  // Get context for right sidebar (varies depending on Explore or Guided Tour selection)
+  const { guided, setGuided } = useContext(GuidedContext);
+  console.log(guided);
+
   // Get state for carousel
   const [index, setIndex] = useState(0);
 
@@ -87,6 +92,7 @@ const Map = () => {
                                   />
                                   <Carousel.Caption>
                                     <h3>{location.title}</h3>
+                                    {guided && <h3>We're in guided mode</h3>}
                                     <ReactMarkdown 
                                         source={location.text}
                                         renderers={{link: LinkRenderer}}/>
