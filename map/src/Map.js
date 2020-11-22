@@ -24,7 +24,7 @@ const Map = () => {
   useEffect(() => {
       map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3',
+      style: 'mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3?optimize=true',
       center:[-72.92889674697767, 41.311363185264725],
       zoom: 14.66,
     });
@@ -109,8 +109,7 @@ const Map = () => {
     map.current.flyTo(newLocation);
   });
 
-  // Todo: a useEffect for guided, when changes, need to fly map to the overview position
-  // and possible set index back to 0 (but I feel like probably not...)
+  // Hook: guided changes, fly map to the overview position
   useEffect(() => {
     // Fly to overview position
     if(guided === false) {
@@ -140,7 +139,7 @@ const Map = () => {
               <div className="h-100 d-flex flex-column">
                 <Row className="justify-content-center flex-grow-1 bg-purple">
                   <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
-                    {locationComponents}
+                    {guided && locationComponents}
                   </Carousel>
                 </Row>
               </div>
