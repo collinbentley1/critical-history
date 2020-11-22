@@ -27,8 +27,8 @@ function SiteNav() {
           width='46'
           height='46'
           alt='Critical History Map logo'
-        />
-        <a href='/' className='ml-3'>Critical History Map</a>
+        />{' '}
+        Critical History Map
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='navbar-nav' />
       <Navbar.Collapse id='navbar-nav'>
