@@ -44,6 +44,8 @@ const Map = () => {
       // location carousel when marker is clicked
       el.addEventListener('click', () => {
         console.log(marker.id);
+        handleSelect(marker.id);
+        setGuided(true);
       });
       // Create popup for marker (when clicked)
       // TODO: hover over marker to open / close markers
@@ -104,8 +106,22 @@ const Map = () => {
   useEffect(() => {
     const newLocation = locationData.find(location => location.id === index);
     // Fly to new location
-    map.current.flyTo(newLocation)
-  }, [index]);
+    map.current.flyTo(newLocation);
+  });
+
+  // Todo: a useEffect for guided, when changes, need to fly map to the overview position
+  // and possible set index back to 0 (but I feel like probably not...)
+  useEffect(() => {
+    // Fly to overview position
+    if(guided === false) {
+      map.current.flyTo({
+        center:[-72.92889674697767, 41.311363185264725],
+        zoom: 14.66,
+        pitch: 0,
+        bearing: 0,
+      });
+    }
+  }, [guided])
 
   // Link renderer: allow links to open in new tab
   function LinkRenderer(props) {

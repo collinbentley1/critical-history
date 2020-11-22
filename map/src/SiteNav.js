@@ -25,7 +25,7 @@ function SiteNav() {
 
   return (
     <Navbar bg='light' expand='lg' className="fixed-top">
-      <Navbar.Brand href='#home' className='brandName'>
+      <Navbar.Brand href='/' className='brandName'>
         <img
           src={logo}
           width='46'
