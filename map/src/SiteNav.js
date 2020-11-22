@@ -37,10 +37,11 @@ function SiteNav() {
       <Navbar.Toggle aria-controls='navbar-nav' />
       <Navbar.Collapse id='navbar-nav'>
         <Nav className='ml-auto'>
-          <Nav.Link href='#about'>About</Nav.Link>
-          <Nav.Link href='#' onClick={() => typeform.open()}>Add Location</Nav.Link>
-          <Nav.Link href='#' onClick={() => typeform.open()}>Contact Us</Nav.Link>
+          <Nav.Link href='#about' className="pl-3 pr-3">About</Nav.Link>
+          <Nav.Link href='#' className="pl-3 pr-3" onClick={() => typeform.open()}>Add Location</Nav.Link>
+          <Nav.Link href='#' className="pl-3 mr-4" onClick={() => typeform.open()}>Contact Us</Nav.Link>
           <Button 
+            className="pl-4 pr-4 mr-2"
             variant='outline-secondary'
             onClick={guided ? () => setGuided(false) : () => setGuided(true)}
             >

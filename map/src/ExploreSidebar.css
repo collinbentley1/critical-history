@@ -1,0 +1,3 @@
+.sidebar-marker {
+    filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}

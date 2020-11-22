@@ -8,6 +8,7 @@ import './Map.css';
 import locationData from './locationData.js';
 import ReactMarkdown from 'react-markdown';
 import GuidedContext from './guided-context';
+import ExploreSidebar from './ExploreSidebar';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
  // React and Mapbox can be confusing to use together at first
@@ -63,19 +64,19 @@ const Map = () => {
     return () => map.current.remove();
   }, []);  // [] in useEffect mimics componentDidMount(); (will run only once)
 
-  // Get context for right sidebar (varies depending on Explore or Guided Tour selection)
+  // Get context for right sidebar (varies depending on Explore or Guided Tour mode)
   const { guided, setGuided } = useContext(GuidedContext);
   console.log(guided);
 
-  // Get state for carousel
+  // Get state for carousel (used in guided mode)
   const [index, setIndex] = useState(0);
 
-  // Function to update carousel state
+  // Function to update carousel state (used in guided mode)
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  // Build components for carousel
+  // Build components for carousel (when in guided mode)
   const locationComponents = locationData.sort(function(a, b) {
                               if (a.id < b.id) {
                                 return -1;
@@ -101,6 +102,7 @@ const Map = () => {
                                   </Carousel.Caption>
                               </Carousel.Item>
                               )});
+
 
   // Carousel hook: updates map when carousel index changes
   useEffect(() => {
@@ -137,7 +139,8 @@ const Map = () => {
             </Col>
             <Col xs lg="5" className="mt-5 pt-4">
               <div className="h-100 d-flex flex-column">
-                <Row className="justify-content-center flex-grow-1 bg-purple">
+                <Row className="justify-content-center flex-grow-1 bg-light">
+                  {guided ? null : <ExploreSidebar />}
                   <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
                     {guided && locationComponents}
                   </Carousel>
