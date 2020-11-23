@@ -66,7 +66,6 @@ const Map = () => {
 
   // Get context for right sidebar (varies depending on Explore or Guided Tour mode)
   const { guided, setGuided } = useContext(GuidedContext);
-  console.log(guided);
 
   // Get state for carousel (used in guided mode)
   const [index, setIndex] = useState(0);

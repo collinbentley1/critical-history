@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import * as typeformEmbed from '@typeform/embed';
+import About from './About';
 import GuidedContext from './guided-context';
 import logo from './logo.svg';
 import './SiteNav.css';
@@ -34,9 +35,9 @@ function SiteNav() {
       <Navbar.Toggle aria-controls='navbar-nav' />
       <Navbar.Collapse id='navbar-nav'>
         <Nav className='ml-auto'>
-          <Nav.Link href='#about' className="pl-3 pr-3">About</Nav.Link>
-          <Nav.Link href='#' className="pl-3 pr-3" onClick={() => typeform.open()}>Add Location</Nav.Link>
-          <Nav.Link href='#' className="pl-3 mr-4" onClick={() => typeform.open()}>Contact Us</Nav.Link>
+          <About />
+          <Nav.Link className="pl-3 pr-3" onClick={() => typeform.open()}>Add Location</Nav.Link>
+          <Nav.Link className="pl-3 mr-4" onClick={() => typeform.open()}>Contact Us</Nav.Link>
           <Button 
             className="pl-4 pr-4 mr-2"
             variant='outline-secondary'
