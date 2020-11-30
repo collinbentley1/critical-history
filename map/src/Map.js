@@ -10,6 +10,12 @@ import ReactMarkdown from 'react-markdown';
 import GuidedContext from './guided-context';
 import ExploreSidebar from './ExploreSidebar';
 
+// BUG: If explore mode and click any marker other than Stiles,
+// fly works as expected and clicking new markers will allow for
+// fly, but cannot use carousel to fly and carousel is not
+// advanced. Issue with index being set wrt context
+
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
  // React and Mapbox can be confusing to use together at first
   // because they both have state and modify a virtual DOM.
