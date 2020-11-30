@@ -37,6 +37,30 @@ img {
   width: 75%;
 } */
 
+.carousel-image {
+  overflow: hidden;
+  position: relative;
+  padding-top: 0.7em;
+}
+
+.carousel-image .image-credit {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.image-credit {
+  background: rgba(0, 0, 0, 0.7);
+  color: #ccc;
+  display: inline-block;
+  font-size: 0.6em;
+  padding: 2px 6px;
+  position: absolute;
+  border-radius: 0rem 0rem .25rem 0rem;
+  bottom: 0;
+  right: 0;
+}
+
 .carousel-item.active {
   display: flex;
   justify-content: center;

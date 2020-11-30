@@ -92,6 +92,7 @@ const Map = () => {
                                       <h3>{location.title}</h3>
                                     </div>
                                     <div className="carousel-image mr-5 ml-5">
+                                      <span class="image-credit">{location.image_credit}</span>
                                       <img
                                         className="rounded"
                                         src={location.image}
