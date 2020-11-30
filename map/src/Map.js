@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import './Map.css';
-import locationData from './locationData.js';
 import ReactMarkdown from 'react-markdown';
 import GuidedContext from './guided-context';
 import ExploreSidebar from './ExploreSidebar';
@@ -15,6 +14,11 @@ import ExploreSidebar from './ExploreSidebar';
 // fly, but cannot use carousel to fly and carousel is not
 // advanced. Issue with index being set wrt context
 
+// Get locationData from combination of all json files in location folder
+function importAll(r) {
+  return r.keys().map(r);
+}
+const locationData = importAll(require.context('./locations', false, /\.json$/));
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
  // React and Mapbox can be confusing to use together at first
