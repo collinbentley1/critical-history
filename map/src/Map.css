@@ -6,3 +6,39 @@
   height: 35px;
   cursor: pointer;
 }
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  
+}
+
+.carousel-control-prev-icon {
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}
+
+.carousel-control-next-icon {
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}
+
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}
+
+.carousel-inner > .item > .img {
+  margin: 0 auto;
+}
+
+/* .carousel-image {
+  height: 75%;
+  width: 75%;
+} */
+
+.carousel-item.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

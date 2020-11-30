@@ -75,7 +75,7 @@ const Map = () => {
     setIndex(selectedIndex);
   };
 
-  // Build components for carousel (when in guided mode)
+  // Build components for carousel (when in guided mode) 
   const locationComponents = locationData.sort(function(a, b) {
                               if (a.id < b.id) {
                                 return -1;
@@ -86,19 +86,25 @@ const Map = () => {
                               return 0;
                               }).map(function (location) {
                               return(
-                              <Carousel.Item>
-                                  <img
-                                    className="d-block w-450"
-                                    src={location.image}
-                                    alt={location.image_alt}
-                                  />
-                                  <Carousel.Caption>
-                                    <h3>{location.title}</h3>
-                                    {guided && <h3>We're in guided mode</h3>}
-                                    <ReactMarkdown 
-                                        source={location.text}
-                                        renderers={{link: LinkRenderer}}/>
-                                  </Carousel.Caption>
+                              <Carousel.Item className="mt-2 pl-4 pr-4 text-center">
+                                  <div className="mr-3 ml-3">
+                                    <div className="d-flex mb-2 justify-content-center text-center">
+                                      <h3>{location.title}</h3>
+                                    </div>
+                                    <div className="carousel-image mr-5 ml-5">
+                                      <img
+                                        className="rounded"
+                                        src={location.image}
+                                        alt={location.image_alt}
+                                      />
+                                    </div>
+                                    <div className="d-flex mr-5 ml-5 mt-4 justify-content-center text-center">
+                                      <ReactMarkdown 
+                                          source={location.text}
+                                          renderers={{link: LinkRenderer}}
+                                      />
+                                    </div>
+                                  </div>
                               </Carousel.Item>
                               )});
 
@@ -129,7 +135,7 @@ const Map = () => {
   }
 
   return (
-      <Container fluid className="h-100">
+      <Container fluid className="h-100 overflow-hidden">
           <Row className="h-100">
             <Col xs lg="7" className="bg-gray text-white mt-5 pt-4 pl-0">
               <div className="map-wrapper">

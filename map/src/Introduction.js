@@ -32,7 +32,7 @@ function Introduction() {
         />
       </Modal.Header>
       <Modal.Body className="text-center pl-5 pr-5 introduction-text">
-      <h1 class="pt-1 pb-2">Critical History Map</h1>
+      <h1 className="pt-1 pb-2">Critical History Map</h1>
       <p>Yale University’s namesake is Elihu Yale, a slave trader and the governor of the British East India Company responsible for over a century of colonial rule in India. This Critical History Map was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.</p>
       </Modal.Body>
       <Modal.Footer className="justify-content-center">
