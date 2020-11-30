@@ -9,12 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import GuidedContext from './guided-context';
 import ExploreSidebar from './ExploreSidebar';
 
-// BUG: If explore mode and click any marker other than Stiles,
-// fly works as expected and clicking new markers will allow for
-// fly, but cannot use carousel to fly and carousel is not
-// advanced. Issue with index being set wrt context
-
-// Get locationData from combination of all json files in location folder
+// Get locationData from combination of all JSON files in location folder
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -28,6 +23,12 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
   // this won't work because the Mapbox maintains its own separate
   // state. The equivalent is using map.on('event', () => {})
 const Map = () => {
+  // Get context for right sidebar (varies depending on Explore or Guided Tour mode)
+  const [ guided, setGuided ] = useContext(GuidedContext);
+
+  // Get state for carousel (used in guided mode)
+  const [index, setIndex] = useState(0);
+  
   const mapContainerRef = useRef(null);
   const map = useRef();
 
@@ -46,7 +47,6 @@ const Map = () => {
     //               map.current.getCenter(),
     //               map.current.getPitch());
     // });
-
     locationData.forEach(marker => {
       // Create a DOM element for marker
       var el = document.createElement('div');
@@ -54,13 +54,10 @@ const Map = () => {
       // Add event listener on marker to adjust
       // location carousel when marker is clicked
       el.addEventListener('click', () => {
-        console.log(marker.id);
-        handleSelect(marker.id);
+        setIndex(marker.id);
         setGuided(true);
       });
       // Create popup for marker (when clicked)
-      // TODO: hover over marker to open / close markers
-      // TODO: styling for popup
       var popup = new mapboxgl.Popup({offset: 25})
         .setText(marker.title);
       // Add marker to the map
@@ -73,12 +70,6 @@ const Map = () => {
     // Clean up on dismount
     return () => map.current.remove();
   }, []);  // [] in useEffect mimics componentDidMount(); (will run only once)
-
-  // Get context for right sidebar (varies depending on Explore or Guided Tour mode)
-  const { guided, setGuided } = useContext(GuidedContext);
-
-  // Get state for carousel (used in guided mode)
-  const [index, setIndex] = useState(0);
 
   // Function to update carousel state (used in guided mode)
   const handleSelect = (selectedIndex, e) => {
@@ -119,13 +110,12 @@ const Map = () => {
                               </Carousel.Item>
                               )});
 
-
   // Carousel hook: updates map when carousel index changes
   useEffect(() => {
     const newLocation = locationData.find(location => location.id === index);
     // Fly to new location
     map.current.flyTo(newLocation);
-  });
+  }, [index]);
 
   // Hook: guided changes, fly map to the overview position
   useEffect(() => {
@@ -137,6 +127,10 @@ const Map = () => {
         pitch: 0,
         bearing: 0,
       });
+    }
+    else {
+      const newLocation = locationData.find(location => location.id === index);
+      map.current.flyTo(newLocation);
     }
   }, [guided])
 
@@ -156,10 +150,13 @@ const Map = () => {
             <Col xs lg="5" className="mt-5 pt-4">
               <div className="h-100 d-flex flex-column">
                 <Row className="justify-content-center flex-grow-1 bg-light">
-                  {guided ? null : <ExploreSidebar />}
-                  <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
-                    {guided && locationComponents}
-                  </Carousel>
+                  {guided ?                   
+                            <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+                              {locationComponents}
+                            </Carousel> 
+                          : 
+                          <ExploreSidebar />
+                  }
                 </Row>
               </div>
             </Col>            
@@ -167,5 +164,4 @@ const Map = () => {
         </Container>
     );
 };
-
 export default Map;

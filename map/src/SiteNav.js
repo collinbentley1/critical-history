@@ -20,7 +20,7 @@ const typeform = typeformEmbed.makePopup('https://cdbentley.typeform.com/to/fgEA
 
 function SiteNav() {
   // Get context for right sidebar (varies depending on Explore or Guided Tour selection)
-  const { guided, setGuided } = useContext(GuidedContext);
+  const [ guided, setGuided ] = useContext(GuidedContext);
   return (
     <Navbar bg='light' expand='lg' className="fixed-top">
       <Navbar.Brand href='/' className='brandName'>

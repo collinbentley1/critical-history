@@ -7,10 +7,13 @@ import GuidedContext from "./guided-context";
 
 function Introduction() {
   const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setGuided(false);
+  }
 
   // Use the context created by App.js
-  const { setGuided } = useContext(GuidedContext);
+  const [ guided, setGuided ] = useContext(GuidedContext);
   const handleGuided = () => {
     setGuided(true);
     setShow(false);

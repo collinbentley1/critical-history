@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Default navigation mode is free explore
-const GuidedContext = React.createContext({
-    guided: false,
-    setGuided: () => {}
-});
+const GuidedContext = React.createContext([
+    false,
+    () => {}
+]);
 
 export default GuidedContext;

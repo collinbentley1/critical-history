@@ -5,16 +5,16 @@ import Introduction from './Introduction';
 import GuidedContext from './guided-context';
 
 function Home() {
-  const [guided, setGuided] = useState(false);
-  const value = { guided, setGuided };
+  const guided = useState(false);
+  // const value = { guided, setGuided };
 
 
   return (
     <div className='Home'>
-      <GuidedContext.Provider value={value}>
+      <GuidedContext.Provider value={guided}>
+        <Introduction />
         <SiteNav />
         <Map />
-        <Introduction />
       </GuidedContext.Provider>
     </div>
   );
