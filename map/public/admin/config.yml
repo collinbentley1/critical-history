@@ -4,12 +4,16 @@ backend:
   branch: react-refactor
 publish_mode: editorial_workflow
 media_folder: /map/public/images
+public_folder: /map/public/images
 
 collections:
   - name: locations
     label: Locations
     label_singular: Location
+    sortableFields: [id, title]
     folder: /map/src/locations
+    media_folder: '/map/public/images'
+    public_folder: '/map/public/images'
     format: json
     create: true
     slug: "{{simple}}"
