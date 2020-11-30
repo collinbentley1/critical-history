@@ -8,7 +8,7 @@ media_folder: /map/public/images
 collections:
   - name: locations
     label: Locations
-    label_singular: location
+    label_singular: Location
     folder: /map/src/locations
     format: json
     create: true
