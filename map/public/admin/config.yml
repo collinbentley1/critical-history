@@ -6,27 +6,28 @@ publish_mode: editorial_workflow
 media_folder: /map/public/images
 
 collections:
-  - name: settings
-    label: Settings
-    folder: /map/src/content
+  - name: locations
+    label: Locations
+    label_singular: location
+    folder: /map/src/locations
+    format: json
     create: true
+    slug: "{{simple}}"
     identifier_field: title
     fields: 
       - {label: "Location Name", name: "title", widget: "string"}
-      - {label: "Short Name", name: "simple", widget: "string"}
+      - {label: "File Name", name: "simple", widget: "string"}
       - {label: "ID", name: "id", widget: "number", valueType: "int"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Image Alt", name: "image_alt", widget: "string", required: false}
       - {label: "Image Credit", name: "image_credit", widget: "string", required: false}
       - {label: "Status", name: "status", widget: "string", required: false}
       - {label: "Bearing", name: "bearing", widget: "number", valueType: "float", required: false}
-      - {label: "Map Longitude", name: "center_long", widget: "number", valueType: "float"}
-      - {label: "Map Latitude", name: "center_lat", widget: "number", valueType: "float"}
-      - {label: "Marker Longitude", name: "marker_long", widget: "number", valueType: "float", required: false}
-      - {label: "Marker Latitude", name: "marker_lat", widget: "number", valueType: "float", required: false}
-      - {label: "Pitch", name: "pitch", widget: "number", valueType: "float", required: false}
-      - {label: "Speed", name: "speed", widget: "number", valueType: "float", required: false}
-      - {label: "Zoom", name: "zoom", widget: "number", valueType: "float", required: false}
+      - {label: "Map Center: Long, Lat", name: "center", widget: "list", max: 2, min: 2, valueType: "float"}
+      - {label: "Marker Location: Long, Lat", name: "marker", widget: "list", max: 2, min: 2, valueType: "float"}
+      - {label: "Map Pitch", name: "pitch", widget: "number", valueType: "float", required: false}
+      - {label: "Map Speed", name: "speed", widget: "number", valueType: "float", required: false}
+      - {label: "Map Zoom", name: "zoom", widget: "number", valueType: "float", required: false}
       - {label: "Text", name: "text", widget: "markdown"}
 
 #           - name: name
