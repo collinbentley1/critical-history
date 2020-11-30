@@ -3,20 +3,32 @@ backend:
   repo: collinbentley1/critical-history
   branch: react-refactor
 publish_mode: editorial_workflow
-media_folder: "/map/public/images"
+media_folder: /map/public/images
 
 collections:
   - name: settings
     label: Settings
-    files:
-      - file: public/manifest.json
-        name: manifest
-        label: 'Manifest Settings'
-        fields:
-          - name: short_name
-            label: 'Short Name'
-            widget: string
-            required: true
+    folder: /map/src/content
+    create: true
+    identifier_field: title
+    fields: 
+      - {label: "Location Name", name: "title", widget: "string"}
+      - {label: "Short Name", name: "simple", widget: "string"}
+      - {label: "ID", name: "id", widget: "number", valueType: "int"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Image Alt", name: "image_alt", widget: "string", required: false}
+      - {label: "Image Credit", name: "image_credit", widget: "string", required: false}
+      - {label: "Status", name: "status", widget: "string", required: false}
+      - {label: "Bearing", name: "bearing", widget: "number", valueType: "float", required: false}
+      - {label: "Map Longitude", name: "center_long", widget: "number", valueType: "float"}
+      - {label: "Map Latitude", name: "center_lat", widget: "number", valueType: "float"}
+      - {label: "Marker Longitude", name: "marker_long", widget: "number", valueType: "float", required: false}
+      - {label: "Marker Latitude", name: "marker_lat", widget: "number", valueType: "float", required: false}
+      - {label: "Pitch", name: "pitch", widget: "number", valueType: "float", required: false}
+      - {label: "Speed", name: "speed", widget: "number", valueType: "float", required: false}
+      - {label: "Zoom", name: "zoom", widget: "number", valueType: "float", required: false}
+      - {label: "Text", name: "text", widget: "markdown"}
+
 #           - name: name
 #             label: 'Name'
 #             widget: string
