@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
-import './App.css';
-import SiteNav from './SiteNav';
-import Map from './Map';
-import Introduction from './Introduction';
-import GuidedContext from './guided-context';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './Home';
 
-function App() {
-  const [guided, setGuided] = useState(false);
-  const value = { guided, setGuided };
-
-
-  return (
-    <div className='App'>
-      <GuidedContext.Provider value={value}>
-        <SiteNav />
-        <Map />
-        <Introduction />
-      </GuidedContext.Provider>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
