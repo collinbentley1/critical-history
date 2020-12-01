@@ -155,8 +155,13 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * Janis Jin - `email@example.com`
 * Collin Bentley - `collin.bentley@aya.yale.edu`
 
+## Links
 
-Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name)
+* Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name)
+
+* [Project Backend (restricted)](https://ycriticalhistory.org/admin)
+
+* [Project Feedback Sheet (restricted)](https://docs.google.com/spreadsheets/d/1RhEaSiJ3xxBW87eJXHrG8N-OppfXLvq9yU8OXR_SuwU/edit?usp=sharing)
 
 <!-- ACKNOWLEDGEMENTS
 ## Acknowledgements
