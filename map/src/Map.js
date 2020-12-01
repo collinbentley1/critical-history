@@ -76,6 +76,8 @@ const Map = () => {
     setIndex(selectedIndex);
   };
 
+  // TODO: move this to its own component (no losses here, just need to duplicate code for importing the JSON)
+  // 2ndTODO: also move the code for importing the JSON to its own component
   // Build components for carousel (when in guided mode) 
   const locationComponents = locationData.sort(function(a, b) {
                               if (a.id < b.id) {
@@ -149,7 +151,7 @@ const Map = () => {
             </Col>
             <Col xs lg="5" className="mt-5 pt-4">
               <div className="h-100 d-flex flex-column">
-                <Row className="justify-content-center flex-grow-1 bg-light">
+                <Row className="h-100 justify-content-center bg-light">
                   {guided ?                   
                             <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
                               {locationComponents}
