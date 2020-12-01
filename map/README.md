@@ -158,11 +158,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Links
 
-* Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name)
+* Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name) *(Public)*
 
-* [Project Backend (restricted)](https://ycriticalhistory.org/admin)
+* [Project Backend](https://ycriticalhistory.org/admin) *(Restricted: New users added in Netlify Identity tab)*
 
-* [Project Feedback Sheet (restricted)](https://docs.google.com/spreadsheets/d/1RhEaSiJ3xxBW87eJXHrG8N-OppfXLvq9yU8OXR_SuwU/edit?usp=sharing)
+* [Project Feedback Sheet](https://docs.google.com/spreadsheets/d/1RhEaSiJ3xxBW87eJXHrG8N-OppfXLvq9yU8OXR_SuwU/edit?usp=sharing) *(Restricted)*
 
 <!-- ACKNOWLEDGEMENTS
 ## Acknowledgements
