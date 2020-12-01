@@ -149,8 +149,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-* Esul - `email@example.com`
-* Janis - `email@example.com`
+* Esul Burton - `email@example.com`
+* Janis Jin - `email@example.com`
 * Collin Bentley - `collin.bentley@aya.yale.edu`
 
 
