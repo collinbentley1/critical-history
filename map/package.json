@@ -20,7 +20,7 @@
     "webfontloader": "^1.6.28",
     "yarn": "^1.22.10"
   },
-  "homepage": ".",
+  "homepage": "https://clever-curie-4b211b.netlify.app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
