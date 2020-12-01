@@ -16,7 +16,9 @@
     "react-markdown": "^5.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "webfontloader": "^1.6.28"
+    "serve": "^11.3.2",
+    "webfontloader": "^1.6.28",
+    "yarn": "^1.22.10"
   },
   "homepage": ".",
   "scripts": {
