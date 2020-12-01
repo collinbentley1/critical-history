@@ -114,6 +114,8 @@ NPM will use `create-react-app` to build a production package or deploy a locall
    ```
 
 * Deploy to `ycriticalhistory.org`: Netlify will automatically detect and deploy any changes to the `main` branch. If you'd like to push to your own site, read more about [Netlify build configurations](https://docs.netlify.com/configure-builds/get-started/#basic-build-settings).
+
+* The map is styled using a public Mapbox style maintained by the project owners. You can use it `mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3` or you can create and use your own custom style by updating `Map.js`.
 <!-- ROADMAP -->
 ## Roadmap
 
