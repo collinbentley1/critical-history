@@ -13,14 +13,10 @@
   <h3 align="center">Critical History Map</h3>
 
   <p align="center">
-    <!-- project_description
-    <br /> -->
-    <!-- <a href="https://github.com/collinbentley1/critical-history_name"><strong>Explore the docs »</strong></a> -->
-    <!-- <br />
-    <br /> -->
+    <!-- project_breadcrumbs -->
     <a href="https://clever-curie-4b211b.netlify.app/">View Demo</a>
     ·
-    <a href="https://github.com/collinbentley1/critical-history/issues">critical-historyrt Bug</a>
+    <a href="https://github.com/collinbentley1/critical-history/issues">Report Bug</a>
     ·
     <a href="https://github.com/collinbentley1/critical-history/issues">Request Feature</a>
   </p>
@@ -45,7 +41,13 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contributing">Contributing</a>
+      <ul>
+        <li><a href="#technical-contributions">Technical Contributions</a></li>
+        <li><a href="#leadership-contributions">Leadership Contributions</a></li>
+        <li><a href="#map-contributions">Map Contributions</a></li>
+      </ul>
+      </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
