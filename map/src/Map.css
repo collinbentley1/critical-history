@@ -14,6 +14,25 @@
   padding: .8rem;
 }
 
+.carousel-inner {
+  max-height: calc(100vh - 108px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* box-shadow: inset 0 -80px 40px -55px #1d212f; */
+}
+
+.carousel-inner {
+  max-height: calc(100vh - 71px);
+  box-shadow: inset 0 -80px 40px -55px #1d212f;
+}
+
+
+.carousel-inner::-webkit-scrollbar {
+  scrollbar-width: none;
+  display: none;
+  width: 0;
+}
+
 
 
 img {
