@@ -178,7 +178,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [issues-url]: https://github.com/collinbentley1/critical-history/issues
 
 [license-shield]: https://img.shields.io/github/license/collinbentley1/critical-history.svg?style=for-the-badge
-[license-url]: https://github.com/collinbentley1/critical-history/blob/master/LICENSE.txt
+[license-url]: https://github.com/collinbentley1/critical-history/blob/master/LICENSE
 
 [netlify-shield]: https://img.shields.io/netlify/760047ea-9eef-446f-84c4-8e8364e116e2?logo=netlify&style=for-the-badge
 
