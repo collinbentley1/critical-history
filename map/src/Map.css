@@ -22,8 +22,8 @@
 }
 
 .carousel-inner {
-  max-height: calc(100vh - 71px);
-  box-shadow: inset 0 -80px 40px -55px #1d212f;
+  max-height: calc(100vh - 110px);
+  /* box-shadow: inset 0 -80px 40px -55px #1d212f; */
 }
 
 

@@ -25,6 +25,7 @@ function SiteNav() {
     <Navbar bg='light' expand='lg' className="fixed-top">
       <Navbar.Brand href='/' className='brandName'>
         <img
+        className="mr-3"
           src={logo}
           width='46'
           height='46'
