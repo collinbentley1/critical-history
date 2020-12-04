@@ -1,7 +1,7 @@
 <!-- PROJECT SHIELDS -->
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 ![Netlify][netlify-shield]
+![GitHub][license-shield]
+[![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -177,8 +177,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [issues-shield]: https://img.shields.io/github/issues/collinbentley1/critical-history.svg?style=for-the-badge
 [issues-url]: https://github.com/collinbentley1/critical-history/issues
 
-[license-shield]: https://img.shields.io/github/license/collinbentley1/critical-history.svg?style=for-the-badge
-[license-url]: https://github.com/collinbentley1/critical-history/blob/master/LICENSE
+[license-shield]: https://img.shields.io/github/license/collinbentley1/critical-history?style=for-the-badge
 
 [netlify-shield]: https://img.shields.io/netlify/760047ea-9eef-446f-84c4-8e8364e116e2?logo=netlify&style=for-the-badge
 
