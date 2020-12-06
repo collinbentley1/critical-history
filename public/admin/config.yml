@@ -1,19 +1,19 @@
 backend:
   name: git-gateway
   repo: collinbentley1/critical-history
-  branch: react-refactor
+  branch: master
 publish_mode: editorial_workflow
-media_folder: /map/public/images
-public_folder: /map/public/images
+media_folder: /public/images
+public_folder: /public/images
 
 collections:
   - name: locations
     label: Locations
     label_singular: Location
     sortableFields: [id, title]
-    folder: /map/src/locations
-    media_folder: '/map/public/images'
-    public_folder: '/map/public/images'
+    folder: /src/locations
+    media_folder: '/public/images'
+    public_folder: '/public/images'
     format: json
     create: true
     slug: "{{simple}}"
