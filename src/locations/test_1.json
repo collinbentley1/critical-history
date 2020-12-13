@@ -1,0 +1,16 @@
+{
+  "title": "Test 1",
+  "simple": "test_1",
+  "id": 10,
+  "image": "/public/images/screenshot.png",
+  "image_credit": "Collin Bentley",
+  "text": "**bold**",
+  "center": [
+    "[70",
+    "53]"
+  ],
+  "marker": [
+    "[70",
+    "53]"
+  ]
+}
