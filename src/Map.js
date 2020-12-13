@@ -102,7 +102,7 @@ const Map = () => {
                                         alt={location.image_alt}
                                       />
                                     </div>
-                                    <div className="d-flex mr-5 ml-5 mt-4 justify-content-center">
+                                    <div className="d-flex mr-5 ml-5 mt-4">
                                       <ReactMarkdown 
                                           source={location.text}
                                           renderers={{link: LinkRenderer}}
