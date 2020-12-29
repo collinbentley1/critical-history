@@ -1,16 +1,22 @@
 {
-    "title": "New Haven Green / Phelps Gate",
-    "simple": "green",
-    "id": 4,
-    "image": "/images/green.jpg",
-    "image_alt": null,
-    "image_credit": "Nancy Kennedy / Getty Images",
-    "status": null,
-    "bearing": 172,
-    "center": [-72.9280551271001, 41.30847355141913],
-    "marker": [-72.927987, 41.308345],
-    "pitch": null,
-    "speed": 0.1,
-    "zoom": 17.372117891276627,
-    "text": "College Street functions as an unofficial border between Yale's campus and New Haven. Though Yale is obviously located within New Haven, there are clear and distinct boundaries created institutionally, structurally, and architecturally by the university. Standing here, you actually can see that Phelps Gate has been intentionally misaligned with the central pathway of New Haven Green. If you have already been to campus, think of when many of you walked through Phelps Gate into Old Campus, a private, enclosed quad located in the middle of downtown New Haven. Though you may have been welcomed through these gates, who are these gates keeping out? \nThere was one critical time in Yale's history when the gates between Yale and the Green were opened. May Day, 1970. When President Brewster declared that the gates be kept open to the tens of thousands Black Panthers and supporters flowing into the city, Old Campus held portable toilets, functioning as a rest stop for those rallying on the Green. Two residential colleges, Pierson and Davenport, became a first aid and family and child day-care centers, respectively. May Day may have been one of the few times the university has suspended its normal campus-city boundaries."
-  }
+  "pitch": null,
+  "image_alt": null,
+  "speed": 0.1,
+  "text": "College Street functions as an unofficial border between Yale's campus and New Haven. Though Yale is obviously located within New Haven, there are clear and distinct boundaries created institutionally, structurally, and architecturally by the university. Standing here, you actually can see that Phelps Gate has been intentionally misaligned with the central pathway of New Haven Green. If you have already been to campus, think of when many of you walked through Phelps Gate into Old Campus, a private, enclosed quad located in the middle of downtown New Haven. Though you may have been welcomed through these gates, who are these gates keeping out?\n\n \nThere was one critical time in Yale's history when the gates between Yale and the Green were opened. May Day, 1970. When President Brewster declared that the gates be kept open to the tens of thousands Black Panthers and supporters flowing into the city, Old Campus held portable toilets, functioning as a rest stop for those rallying on the Green. Two residential colleges, Pierson and Davenport, became a first aid and family and child day-care centers, respectively. May Day may have been one of the few times the university has suspended its normal campus-city boundaries.",
+  "bearing": 172,
+  "simple": "green",
+  "status": null,
+  "zoom": 17.372117891276627,
+  "center": [
+    -72.9280551271001,
+    41.30847355141913
+  ],
+  "title": "New Haven Green / Phelps Gate",
+  "marker": [
+    -72.927987,
+    41.308345
+  ],
+  "id": 4,
+  "image": "/images/green.jpg",
+  "image_credit": "Nancy Kennedy / Getty Images"
+}
