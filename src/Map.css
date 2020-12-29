@@ -9,7 +9,6 @@
 
 .mapboxgl-popup-content {
   font-family: 'Roboto', sans-serif;
-  /* font-weight: 400; */
   color: black;
   padding: .8rem;
 }
@@ -18,12 +17,10 @@
   max-height: calc(100vh - 108px);
   overflow-y: scroll;
   scrollbar-width: none;
-  /* box-shadow: inset 0 -80px 40px -55px #1d212f; */
 }
 
 .carousel-inner {
   max-height: calc(100vh - 110px);
-  /* box-shadow: inset 0 -80px 40px -55px #1d212f; */
 }
 
 
@@ -85,11 +82,6 @@ img {
 .carousel-inner > .item > .img {
   margin: 0 auto;
 }
-
-/* .carousel-image {
-  height: 75%;
-  width: 75%;
-} */
 
 .carousel-image {
   overflow: hidden;
