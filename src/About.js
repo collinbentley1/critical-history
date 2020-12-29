@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
-import AboutBody from './AboutBody';
-import AboutPrivacy from './AboutPrivacy';
+import { useRoutes, A } from 'hookrouter';
+import routes from './router';
 import './About.css';
-
-import { useRoutes } from 'hookrouter';
-
-const routes = {
-    '/' : () => <AboutBody />,
-    '/privacy' : () => <AboutPrivacy />
-}
 
 function About() {
     const [show, setShow] = useState(false);
@@ -30,9 +23,12 @@ function About() {
             centered>
             <Modal.Header closeButton>
             </Modal.Header>
-            <Modal.Body className="text-center pl-5 pr-5 mb-3 about-text">
+            <Modal.Body>
                 { routeResult }
             </Modal.Body>
+            <Modal.Footer className="text-center justify-content-center">
+                <A href="/privacy">Privacy Policy</A>
+            </Modal.Footer>
             </Modal>
         </>
       );
