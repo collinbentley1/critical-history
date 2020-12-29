@@ -128,6 +128,7 @@ const Map = () => {
         zoom: 14.66,
         pitch: 0,
         bearing: 0,
+        speed: 0.3,
       });
     }
     else {
