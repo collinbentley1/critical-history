@@ -14,7 +14,7 @@
 
   <p align="center">
     <!-- project_breadcrumbs -->
-    <a href="https://clever-curie-4b211b.netlify.app/">View Demo</a>
+    <a href="https://ycriticalhistory.org/">View Demo</a>
     ·
     <a href="https://github.com/collinbentley1/critical-history/issues">Report Bug</a>
     ·
@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://ycriticalhistory.org)
 
 This project is adapted from an in-person tour developed by Esul Burton and Janis Jin. Context and state in functional React control a Mapbox visualization, and content is managed on the backend via NetlifyCMS. Typeform captures new locations and questions from site guests. The live project is served by Netlify.
 
@@ -160,7 +160,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 * Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name) *(Public)*
 
-* [Project Backend](https://ycriticalhistory.org/admin) *(Restricted: New users added in Netlify Identity tab)*
+* [Project Backend](https://ycriticalhistory.org/admin/index.html) *(Restricted: New users added in Netlify Identity tab)*
 
 * [Project Feedback Sheet](https://docs.google.com/spreadsheets/d/1RhEaSiJ3xxBW87eJXHrG8N-OppfXLvq9yU8OXR_SuwU/edit?usp=sharing) *(Restricted)*
 
