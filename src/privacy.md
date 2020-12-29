@@ -1,4 +1,4 @@
-# ycriticalhistory.org Privacy Policy
+# Privacy Policy
 
 This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make an account with ycriticalhistory.org (the “Site”).
 
