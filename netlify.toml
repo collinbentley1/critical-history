@@ -1,0 +1,5 @@
+[[redirects]]
+    from = "/admin"
+    to = "https://ycriticalhistory.org/admin/index.html#/"
+    status = 301
+    force = false
