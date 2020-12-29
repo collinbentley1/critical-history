@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
-import { useRoutes, A } from 'hookrouter';
+import { useRoutes, usePath, A } from 'hookrouter';
 import routes from './router';
 import './About.css';
 
@@ -11,6 +11,7 @@ function About() {
     const handleShow = () => setShow(true);
 
     const routeResult = useRoutes(routes);
+    const path = usePath();
 
     return (
         <>
@@ -23,11 +24,11 @@ function About() {
             centered>
             <Modal.Header closeButton>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{'maxHeight': 'calc(100vh - 210px)', 'overflowY': 'auto'}}>
                 { routeResult }
             </Modal.Body>
             <Modal.Footer className="text-center justify-content-center">
-                <A href="/privacy">Privacy Policy</A>
+                { path === '/privacy' ? <A href="/">About</A> : <A href="/privacy">Privacy Policy</A> }
             </Modal.Footer>
             </Modal>
         </>
