@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <!-- Favicon requirements -->
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/icons/favicon-32x32.png">
@@ -10,8 +11,12 @@
     <link rel="manifest" href="%PUBLIC_URL%/icons/site.webmanifest">
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
+    
     <!-- Mapbox requirement -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Netlify Identity requirement -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <!-- HTML Meta Tags -->
     <title>Critical History Map</title>
@@ -42,8 +47,8 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     
-    <!-- Netlify Identity Widget -->
-    <!-- <script>
+    <!-- Netlify Identity redirect -->
+    <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", user => {
           if (!user) {
@@ -53,6 +58,6 @@
           }
         });
       }
-    </script> -->
+    </script>
   </body>
 </html>
