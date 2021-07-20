@@ -153,7 +153,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 * Esul Burton - `email@example.com`
-* Janis Jin - `email@example.com`
+* Janis Jin - `janisjin06@gmail.com`
 * Collin Bentley - `collin.bentley@aya.yale.edu`
 
 ## Links
