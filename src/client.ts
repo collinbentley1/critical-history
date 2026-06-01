@@ -43,7 +43,6 @@ const elements = {
   list: element<HTMLElement>("location-list"),
   map: element<HTMLElement>("map"),
   mapStatus: element<HTMLElement>("map-status"),
-  modeLabel: element<HTMLElement>("mode-label"),
   navAbout: element<HTMLButtonElement>("nav-about"),
   newLocation: element<HTMLButtonElement>("new-location"),
   next: element<HTMLButtonElement>("next-location"),
@@ -59,7 +58,7 @@ async function boot(): Promise<void> {
   state.selectedLocation = getInitialLocation(loadedLocations);
 
   renderLocationList();
-  renderSelectedLocation();
+  setGuided(false);
   bindControls();
   await setupMap(config);
 
@@ -133,7 +132,7 @@ async function openAbout(view: "about" | "privacy"): Promise<void> {
     elements.aboutPrivacy.textContent = "Privacy Policy";
     renderMarkdownInto(
       elements.aboutContent,
-      "Yale University's namesake is Elihu Yale, a slave trader and governor of the British East India Company responsible for over a century of colonial rule in India.\n\nThis Critical History Map was developed to think about how Yale's history as a colonial institution remains embedded in its architecture and landscape in the present day, and to highlight sites where Yale students and New Haven residents changed the course of the university's history through remarkable moments of struggle.",
+      "Yale University's namesake is Elihu Yale, a slave trader and the governor of the British East India Company responsible for over a century of colonial rule in India.\n\nThis Critical History Map was developed with two ambitions in mind: (1) to think about how Yale's history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university's history through remarkable moments of struggle.",
     );
     if (window.location.pathname === "/privacy") {
       history.replaceState(null, "", "/");
@@ -164,22 +163,13 @@ function renderLocationList(): void {
   for (const location of appLocations) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "location-item";
+    button.className = "carousel-dot";
     button.dataset.locationId = String(location.id);
+    button.ariaLabel = location.title;
     button.addEventListener("click", () => {
       selectLocation(location);
       setGuided(true);
     });
-
-    const title = document.createElement("span");
-    title.className = "location-item-title";
-    title.textContent = location.title;
-
-    const index = document.createElement("span");
-    index.className = "location-item-index";
-    index.textContent = String(location.id + 1).padStart(2, "0");
-
-    button.append(index, title);
     fragment.append(button);
   }
 
@@ -188,6 +178,25 @@ function renderLocationList(): void {
 }
 
 function renderSelectedLocation(): void {
+  if (!state.guided) {
+    const prompt = document.createElement("div");
+    prompt.className = "explore-prompt";
+
+    const marker = document.createElement("img");
+    marker.src = "/images/marker.png";
+    marker.alt = "";
+    marker.width = 40;
+    marker.height = 40;
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Select a location on the map to get started.";
+
+    prompt.append(marker, heading);
+    elements.detail.replaceChildren(prompt);
+    syncActiveLocation();
+    return;
+  }
+
   const location = getSelectedLocation();
   const article = document.createElement("article");
   article.className = "location-article";
@@ -201,7 +210,7 @@ function renderSelectedLocation(): void {
   image.loading = "eager";
 
   const caption = document.createElement("figcaption");
-  caption.textContent = location.imageCredit ? `Image: ${location.imageCredit}` : "";
+  caption.textContent = location.imageCredit ?? "";
 
   imageFrame.append(image, caption);
 
@@ -245,8 +254,8 @@ function selectRelativeLocation(offset: number): void {
 function setGuided(next: boolean): void {
   state.guided = next;
   document.body.dataset.mode = next ? "guided" : "explore";
-  elements.modeLabel.textContent = next ? "Guided Tour" : "Explore";
   elements.guidedToggle.textContent = next ? "Explore" : "Guided Tour";
+  renderSelectedLocation();
 
   if (next) {
     flyTo(cameraForLocation(getSelectedLocation()));
@@ -257,8 +266,12 @@ function setGuided(next: boolean): void {
 
 function syncActiveLocation(): void {
   const id = String(getSelectedLocation().id);
-  for (const button of elements.list.querySelectorAll<HTMLButtonElement>(".location-item")) {
-    button.toggleAttribute("aria-current", button.dataset.locationId === id);
+  for (const button of elements.list.querySelectorAll<HTMLButtonElement>(".carousel-dot")) {
+    if (button.dataset.locationId === id) {
+      button.setAttribute("aria-current", "true");
+    } else {
+      button.removeAttribute("aria-current");
+    }
   }
 }
 
