@@ -1,186 +1,95 @@
-<!-- PROJECT SHIELDS -->
-![Netlify][netlify-shield]
-![GitHub][license-shield]
-[![Issues][issues-shield]][issues-url]
+# Critical History Map
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://ycriticalhistory.org/">
-    <img src="public/images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+Critical History Map is a Yale and New Haven history map adapted from an in-person tour developed by Esul Burton and Janis Jin.
 
-  <h3 align="center">Critical History Map</h3>
+The project is now a pure Bun application deployed to Google Cloud Run through GitOps workflows.
 
-  <p align="center">
-    <!-- project_breadcrumbs -->
-    <a href="https://ycriticalhistory.org/">View Demo</a>
-    ·
-    <a href="https://github.com/collinbentley1/critical-history/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/collinbentley1/critical-history/issues">Request Feature</a>
-  </p>
-</p>
+## What is here
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a>
-      <ul>
-        <li><a href="#technical-contributions">Technical Contributions</a></li>
-        <li><a href="#leadership-contributions">Leadership Contributions</a></li>
-        <li><a href="#map-contributions">Map Contributions</a></li>
-      </ul>
-      </li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-    <li><a href="#links">Links</a></li>
-  </ol>
-</details>
+- A framework-free Bun frontend and Bun HTTP server.
+- Location content in `src/locations/*.json` and static media in `public/images`.
+- Runtime Mapbox configuration served from `/api/config`.
+- Terraform bootstrap for Google Cloud APIs, Terraform state, Workload Identity Federation, and CI service accounts.
+- Terraform production infrastructure for Artifact Registry and Cloud Run.
+- GitHub Actions for Bun verification, Socket Firewall install checks, Checkov/Terraform validation, PR previews, preview cleanup, and production deploys.
+- SHA-pinned GitHub Actions.
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+## Local Development
 
-[![Product Name Screen Shot][product-screenshot]](https://ycriticalhistory.org)
+Use Bun canary, matching CI and the production Docker build:
 
-This project is adapted from an in-person tour developed by Esul Burton and Janis Jin. Context and state in functional React control a Mapbox visualization, and content is managed on the backend via NetlifyCMS. Typeform captures new locations and questions from site guests. The live project is served by Netlify.
+```sh
+bun upgrade --canary
+bun install
+cp .env.example .env.local
+bun run dev
+```
 
-The project was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.
+Set `MAPBOX_ACCESS_TOKEN` in your shell or `.env.local` if you want the map to load locally.
 
-### Built With
+Run the full local check:
 
-* [React](https://reactjs.org)
-* [Bootstrap](https://getbootstrap.com)
-* [NetlifyCMS](https://www.netlifycms.org)
-* [Mapbox](https://docs.mapbox.com/mapbox-gl-js/api/)
-* [Typeform](https://github.com/Typeform/embed)
+```sh
+bun run verify
+```
 
-<!-- GETTING STARTED -->
-## Getting Started
+## Deployment Model
 
-To get a local copy up and running follow these simple steps.
+- Pull requests deploy Cloud Run preview services named `critical-history-pr-<number>`.
+- Closing a pull request deletes its preview Cloud Run service.
+- Pushes to `main` or `master` deploy the production Cloud Run service named `critical-history`.
+- Terraform manages only long-lived shared infrastructure. It does not manage preview environments.
 
-### Prerequisites
+The Google Cloud project display name is `critical-history`. The exact project ID `critical-history` was already reserved globally, so this deployment uses `critical-history-16823277`.
 
-1. Install or update NPM
-  ```sh
-  npm install npm@latest -g
-  ```
+## Bootstrap
 
-### Installation
+The bootstrap root is applied manually because it creates the GitHub Actions identities that later run production Terraform.
 
-1. Clone the critical-history
-   ```sh
-   git clone https://github.com/collinbentley1/critical-history.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Create new file for environment variables in root of project called `.env.local` with the following:
-    ```sh
-    REACT_APP_MAPBOX_API_KEY=REPLACE-WITH-YOUR-KEY
-    ```
-4. You must replace `REPLACE-WITH-YOUR-KEY` with a personal Mapbox API key that you can generate by visiting the [Mapbox Access Tokens](https://account.mapbox.com/access-tokens) page or by using the [Mapbox Tokens API](https://docs.mapbox.com/api/accounts/#tokens).
-<!-- USAGE EXAMPLES -->
-## Usage
+```sh
+gcloud services enable \
+  serviceusage.googleapis.com \
+  cloudresourcemanager.googleapis.com \
+  iam.googleapis.com \
+  iamcredentials.googleapis.com \
+  sts.googleapis.com \
+  storage.googleapis.com \
+  run.googleapis.com \
+  artifactregistry.googleapis.com \
+  --project=critical-history-16823277
 
-NPM will use `create-react-app` to build a production package or deploy a locally hosted version of the project for development purposes.
+export GOOGLE_OAUTH_ACCESS_TOKEN="$(gcloud auth print-access-token)"
+terraform -chdir=infra/terraform/bootstrap init
+terraform -chdir=infra/terraform/bootstrap apply
+terraform -chdir=infra/terraform/prod init
+terraform -chdir=infra/terraform/prod apply
+```
 
-* Build production package
-   ```sh
-   npm run build
-   ```
+Both Terraform roots use a GCS backend:
 
-* Deploy development version
-   ```sh
-   npm start
-   ```
+```text
+bucket: critical-history-tfstate-422714632513
+prefix: critical-history/bootstrap
+prefix: critical-history/prod
+```
 
-* Deploy to `ycriticalhistory.org`: Netlify will automatically detect and deploy any changes to the `main` branch. If you'd like to push to your own site, read more about [Netlify build configurations](https://docs.netlify.com/configure-builds/get-started/#basic-build-settings).
+After bootstrap, set these repository variables from Terraform output:
 
-* The map is styled using a public Mapbox style maintained by the project owners. You can use it `mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3` or you can create and use your own custom style by updating `Map.js`.
-<!-- ROADMAP -->
-## Roadmap
+```sh
+gh variable set GCP_WORKLOAD_IDENTITY_PROVIDER --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw workload_identity_provider)"
+gh variable set GCP_TERRAFORM_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw terraform_service_account_email)"
+gh variable set GCP_PROD_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw prod_deploy_service_account_email)"
+gh variable set GCP_PREVIEW_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw preview_deploy_service_account_email)"
+gh variable set GCP_RUNTIME_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw runtime_service_account_email)"
+gh secret set MAPBOX_ACCESS_TOKEN --repo collinbentley1/critical-history --body "$MAPBOX_ACCESS_TOKEN"
+```
 
-See the [open issues](https://github.com/collinbentley1/critical-history/issues) for a list of proposed features (and known issues). There are many opportunities for current students to improve the project or adapt it for other purposes.
+The Dockerfile uses Docker Hardened Images. Add `DHI_USERNAME` and `DHI_ACCESS_TOKEN` as GitHub Actions secrets before enabling deploy workflows.
 
+## Domain
 
+Custom domain mappings are intentionally empty in Terraform for now. Add the production domain mappings after the Cloud Run service is live and the domain decision is final.
 
-<!-- CONTRIBUTING -->
-## Contributing
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**. 
-
-### Technical Contributions
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Leadership Contributions
-We are looking for an interested student or group of students to take **full** ownership of the project. Contact us below for more details.
-
-### Map Contributions
-We also welcome content contributions in the form of new locations or updates to existing locations. These can be made directly on the live project site.
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-* Esul Burton - `email@example.com`
-* Janis Jin - `janisjin06@gmail.com`
-* Collin Bentley - `collin.bentley@aya.yale.edu`
-
-## Links
-
-* Project Link: [https://github.com/collinbentley1/critical-history](https://github.com/collinbentley1/critical-history_name) *(Public)*
-
-* [Project Backend](https://ycriticalhistory.org/admin/index.html) *(Restricted: New users added in Netlify Identity tab)*
-
-* [Project Feedback Sheet](https://docs.google.com/spreadsheets/d/1RhEaSiJ3xxBW87eJXHrG8N-OppfXLvq9yU8OXR_SuwU/edit?usp=sharing) *(Restricted)*
-
-<!-- ACKNOWLEDGEMENTS
-## Acknowledgements
-
-* []()
-* []()
-* []() -->
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[issues-shield]: https://img.shields.io/github/issues/collinbentley1/critical-history.svg?style=for-the-badge
-[issues-url]: https://github.com/collinbentley1/critical-history/issues
-
-[license-shield]: https://img.shields.io/github/license/collinbentley1/critical-history?style=for-the-badge
-
-[netlify-shield]: https://img.shields.io/netlify/760047ea-9eef-446f-84c4-8e8364e116e2?logo=netlify&style=for-the-badge
-
-[linkedin-url]: https://linkedin.com/in/collinbentley1
-
-[product-screenshot]: public/images/screenshot.png
+Distributed under the MIT License. See `LICENSE` for details.

@@ -1,47 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <!-- Favicon requirements -->
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/icons/favicon-16x16.png">
-    <link rel="manifest" href="%PUBLIC_URL%/icons/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#2b5797">
-    <meta name="theme-color" content="#ffffff">
-    
-    <!-- Mapbox requirement -->
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-
-    <!-- HTML Meta Tags -->
-    <title>Critical History Map</title>
-    <meta name="description" content="This Critical History Map was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.">
-
-    <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="Critical History Map">
-    <meta itemprop="description" content="This Critical History Map was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.">
-    <meta itemprop="image" content="%PUBLIC_URL%/icons/og-image.png">
-
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="%PUBLIC_URL%">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Critical History Map">
-    <meta property="og:description" content="This Critical History Map was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.">
-    <meta property="og:image" content="%PUBLIC_URL%/icons/og-image.png">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Critical History Map">
-    <meta name="twitter:description" content="This Critical History Map was developed with two ambitions in mind: (1) to think about how Yale’s history as a colonial institution remains embedded in its architecture and landscape in the present-day and (2) to highlight sites where Yale students and New Haven residents have changed the course of the university’s history through remarkable moments of struggle.">
-    <meta name="twitter:image" content="%PUBLIC_URL%/icons/og-image.png">
-    
-    <!-- Site title -->
+    <meta name="theme-color" content="#f8f6ef" />
+    <meta
+      name="description"
+      content="Critical History Map of Yale and New Haven sites shaped by colonial history, institutional power, and student and resident organizing."
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="manifest" href="/icons/site.webmanifest" />
+    <link rel="stylesheet" href="/assets/mapbox-gl.css?v=0.2.0" />
+    <link rel="stylesheet" href="/assets/styles.css?v=0.2.0" />
     <title>Critical History Map</title>
   </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+  <body data-mode="explore">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Critical History Map home">
+        <img src="/images/logo.png" alt="" width="40" height="40" />
+        <span>Critical History Map</span>
+      </a>
+      <nav class="nav-actions" aria-label="Primary">
+        <button id="nav-about" type="button">About</button>
+        <button id="new-location" type="button">Add Location</button>
+        <button id="contact" type="button">Contact</button>
+        <button id="guided-toggle" class="mode-button" type="button">Guided Tour</button>
+      </nav>
+    </header>
+
+    <main class="app-shell">
+      <section class="map-pane" aria-label="Critical History Map">
+        <div id="map" class="map"></div>
+        <p id="map-status" class="map-status" hidden></p>
+      </section>
+
+      <aside class="side-pane" aria-label="Locations">
+        <div class="panel-header">
+          <p id="mode-label">Explore</p>
+          <div class="panel-controls" aria-label="Guided tour controls">
+            <button id="previous-location" type="button" aria-label="Previous location">Prev</button>
+            <button id="next-location" type="button" aria-label="Next location">Next</button>
+          </div>
+        </div>
+        <div id="location-list" class="location-list" aria-label="Location list"></div>
+        <div id="location-detail" class="location-detail"></div>
+      </aside>
+    </main>
+
+    <section id="intro-overlay" class="intro-overlay" aria-label="Introduction">
+      <div class="intro-dialog" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+        <img src="/images/logo.png" alt="" width="72" height="72" />
+        <h1 id="intro-title">Critical History Map</h1>
+        <p>
+          Yale University's namesake is Elihu Yale, a slave trader and governor of the British East India Company responsible for over a
+          century of colonial rule in India.
+        </p>
+        <div class="intro-actions">
+          <button id="intro-close" type="button">Explore</button>
+          <button id="intro-guided" class="mode-button" type="button">Guided Tour</button>
+        </div>
+      </div>
+    </section>
+
+    <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-title">
+      <div class="dialog-top">
+        <h2 id="about-title">About</h2>
+        <button id="about-close" type="button" aria-label="Close">Close</button>
+      </div>
+      <div id="about-content" class="about-content"></div>
+      <div class="dialog-bottom">
+        <button id="about-privacy" type="button">Privacy Policy</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/assets/client.js?v=0.2.0"></script>
   </body>
 </html>
