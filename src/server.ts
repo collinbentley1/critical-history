@@ -31,7 +31,7 @@ export async function handleRequest(request: Request): Promise<Response> {
     });
   }
 
-  if (url.pathname === "/healthz") {
+  if (url.pathname === "/healthz" || url.pathname === "/readyz") {
     return json({ ok: true }, { "Cache-Control": "no-store" });
   }
 

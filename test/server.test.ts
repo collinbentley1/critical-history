@@ -10,6 +10,14 @@ describe("server", () => {
     expect(await response.json()).toEqual({ ok: true });
   });
 
+  test("returns production readiness status without caching", async () => {
+    const response = await handleRequest(new Request("http://localhost/readyz"));
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+    expect(await response.json()).toEqual({ ok: true });
+  });
+
   test("returns runtime config without a token by default", async () => {
     const response = await handleRequest(new Request("http://localhost/api/config"));
     const body = (await response.json()) as { mapboxAccessToken: string; mapStyle: string; typeformUrl: string };
