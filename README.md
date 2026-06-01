@@ -37,7 +37,7 @@ bun run verify
 
 - Pull requests deploy Cloud Run preview services named `critical-history-pr-<number>`.
 - Closing a pull request deletes its preview Cloud Run service.
-- Pushes to `main` or `master` deploy the production Cloud Run service named `critical-history`.
+- Pushes to `main` deploy the production Cloud Run service named `critical-history`.
 - Terraform manages only long-lived shared infrastructure. It does not manage preview environments.
 
 The Google Cloud project display name is `critical-history`. The exact project ID `critical-history` was already reserved globally, so this deployment uses `critical-history-16823277`.
