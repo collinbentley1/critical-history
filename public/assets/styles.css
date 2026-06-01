@@ -1,0 +1,612 @@
+:root {
+  color: #212529;
+  background: #f8f9fa;
+  font-family:
+    Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  color: #212529;
+  background: #f8f9fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: #1f5d8c;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.topbar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 74px;
+  padding: 9px 24px 9px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: #f8f9fa;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  color: #212529;
+  font-size: 1.22rem;
+  font-weight: 300;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  color: #212529;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-link,
+.mode-button,
+.intro-actions button,
+.dialog-top button,
+.dialog-bottom button {
+  min-height: 40px;
+  padding: 8px 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+}
+
+.nav-link {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: rgba(0, 0, 0, 0.78);
+  outline: none;
+}
+
+.mode-button,
+.intro-actions button,
+.dialog-top button,
+.dialog-bottom button {
+  border-color: #6c757d;
+  color: #6c757d;
+  background: #f8f9fa;
+}
+
+.mode-button {
+  min-width: 104px;
+  padding-right: 22px;
+  padding-left: 22px;
+}
+
+.mode-button:hover,
+.mode-button:focus-visible,
+.intro-actions button:hover,
+.intro-actions button:focus-visible,
+.dialog-top button:hover,
+.dialog-top button:focus-visible,
+.dialog-bottom button:hover,
+.dialog-bottom button:focus-visible {
+  color: #fff;
+  background: #6c757d;
+  outline: none;
+}
+
+.intro-actions .primary-action {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.intro-actions .primary-action:hover,
+.intro-actions .primary-action:focus-visible {
+  color: #fff;
+  background: #0d6efd;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(390px, 5fr);
+  height: 100vh;
+  padding-top: 74px;
+}
+
+.map-pane {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #4a4a4a;
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+}
+
+.map-status {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  color: #212529;
+  background: #f8f9fa;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+}
+
+.map-marker {
+  width: 35px;
+  height: 35px;
+  min-height: 35px;
+  padding: 0;
+  border: 0;
+  background: url("/images/marker.png") center / contain no-repeat;
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}
+
+.map-marker:hover,
+.map-marker:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.mapboxgl-popup-content {
+  padding: 0.8rem;
+  border-radius: 4px;
+  color: #000;
+  font-family:
+    Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.side-pane {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.location-detail {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.explore-prompt {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 22px;
+  height: 100%;
+  padding: 40px 52px;
+  text-align: center;
+}
+
+.explore-prompt img {
+  width: 40px;
+  height: 40px;
+  filter: invert(32%) sepia(1%) saturate(2785%) hue-rotate(324deg) brightness(101%) contrast(87%);
+}
+
+.explore-prompt h2 {
+  max-width: 14em;
+  margin: 0;
+  font-size: 1.72rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.location-article {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 24px;
+  height: 100%;
+  padding: 18px 74px 64px;
+  overflow: auto;
+  scrollbar-width: none;
+  text-align: center;
+}
+
+.location-article::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.location-heading {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.location-heading h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.location-counter {
+  color: #8b8f93;
+  font-size: 0.8rem;
+}
+
+.location-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  order: 2;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e9ecef;
+}
+
+.location-image img {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+}
+
+.location-image figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: calc(100% - 16px);
+  padding: 2px 6px;
+  border-radius: 4px 0 4px 0;
+  color: #ccc;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.6rem;
+}
+
+.location-copy {
+  order: 3;
+  display: grid;
+  gap: 12px;
+  max-width: 46ch;
+  margin: 0 auto;
+  padding-bottom: 24px;
+  color: #212529;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  hyphens: auto;
+}
+
+.location-copy p,
+.about-content p {
+  margin: 0;
+}
+
+.location-copy ul,
+.about-content ul {
+  margin: 0;
+  padding-left: 22px;
+  text-align: left;
+}
+
+.carousel-control {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 82px;
+  min-height: 82px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: rgba(0, 0, 0, 0.24);
+  background: transparent;
+  font-size: 4.5rem;
+  font-weight: 200;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.carousel-control:hover,
+.carousel-control:focus-visible {
+  color: rgba(0, 0, 0, 0.38);
+  outline: none;
+}
+
+.carousel-control-prev {
+  left: 22px;
+}
+
+.carousel-control-next {
+  right: 22px;
+}
+
+.carousel-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px 20px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  min-height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.carousel-dot:hover,
+.carousel-dot:focus-visible,
+.carousel-dot[aria-current="true"] {
+  background: rgba(0, 0, 0, 0.42);
+  outline: none;
+}
+
+body[data-mode="explore"] .carousel-control,
+body[data-mode="explore"] .carousel-indicators {
+  display: none;
+}
+
+.intro-overlay {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.intro-overlay[hidden] {
+  display: none;
+}
+
+.intro-dialog {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  width: min(520px, 100%);
+  padding: 20px 44px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.intro-dialog img {
+  width: 100px;
+  height: 105px;
+}
+
+.intro-dialog h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.intro-dialog p {
+  margin: 0;
+  color: #212529;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.intro-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.about-dialog {
+  width: min(520px, calc(100% - 36px));
+  max-height: min(760px, calc(100vh - 36px));
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  color: #212529;
+  background: #fff;
+}
+
+.about-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.dialog-top,
+.dialog-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.dialog-bottom {
+  justify-content: center;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 0;
+}
+
+.dialog-top h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.about-content {
+  display: grid;
+  gap: 14px;
+  max-height: min(560px, calc(100vh - 180px));
+  overflow: auto;
+  padding: 28px 44px;
+  color: #212529;
+  font-weight: 300;
+  line-height: 1.58;
+  text-align: center;
+}
+
+.about-content h2,
+.about-content h3 {
+  margin: 0;
+  font-weight: 300;
+}
+
+@media (max-width: 980px) {
+  body {
+    overflow: auto;
+  }
+
+  .topbar {
+    position: sticky;
+    min-height: 0;
+    padding-right: 16px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span {
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav-link,
+  .mode-button {
+    padding: 7px 9px;
+    font-size: 0.9rem;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - 74px);
+    padding-top: 0;
+  }
+
+  .map-pane {
+    min-height: 54vh;
+  }
+
+  .side-pane {
+    min-height: 46vh;
+  }
+
+  .location-article {
+    min-height: 46vh;
+  }
+}
+
+@media (max-width: 620px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .nav-link,
+  .mode-button {
+    flex: 1 1 calc(50% - 6px);
+  }
+
+  .location-article {
+    padding: 18px 46px 58px;
+  }
+
+  .location-image img {
+    max-height: 220px;
+  }
+
+  .carousel-control {
+    width: 40px;
+    font-size: 3.5rem;
+  }
+
+  .carousel-control-prev {
+    left: 4px;
+  }
+
+  .carousel-control-next {
+    right: 4px;
+  }
+
+  .intro-dialog,
+  .about-content {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .intro-dialog h1 {
+    font-size: 1.9rem;
+  }
+}
