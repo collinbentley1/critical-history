@@ -88,7 +88,7 @@ The Dockerfile uses Docker Hardened Images. Add `DHI_USERNAME` and `DHI_ACCESS_T
 
 ## Domain
 
-Custom domain mappings are intentionally empty in Terraform for now. Add the production domain mappings after the Cloud Run service is live and the domain decision is final.
+Production custom domain mappings are `ycriticalhistory.org` and `www.ycriticalhistory.org`. Verify the domain with Google Search Console before applying Terraform, then add the DNS records emitted by the `cloud_run_domain_mappings` output at the authoritative DNS provider.
 
 ## License
 

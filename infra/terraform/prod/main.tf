@@ -4,7 +4,10 @@ locals {
     managed-by = "terraform"
   }
 
-  custom_domains = toset([])
+  custom_domains = toset([
+    "ycriticalhistory.org",
+    "www.ycriticalhistory.org",
+  ])
 }
 
 resource "google_artifact_registry_repository" "site" {
@@ -118,6 +121,9 @@ resource "google_cloud_run_v2_service" "site" {
     ignore_changes = [
       client,
       client_version,
+      labels,
+      template[0].labels,
+      template[0].containers[0].env,
       template[0].containers[0].image,
     ]
   }
