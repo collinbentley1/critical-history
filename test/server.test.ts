@@ -43,4 +43,13 @@ describe("server", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("Content-Type")).toContain("text/html");
   });
+
+  test("sets strict-transport-security on every response", async () => {
+    const paths = ["/healthz", "/api/config", "/api/locations", "/", "/privacy", "/does-not-exist.png"];
+
+    for (const path of paths) {
+      const response = await handleRequest(new Request(`http://localhost${path}`));
+      expect(response.headers.get("Strict-Transport-Security")).toBe("max-age=31536000; includeSubDomains");
+    }
+  });
 });
