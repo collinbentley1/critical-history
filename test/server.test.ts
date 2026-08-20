@@ -3,7 +3,7 @@ import { handleRequest } from "../src/server";
 
 describe("server", () => {
   test("returns health status without caching", async () => {
-    const response = await handleRequest(new Request("http://localhost/healthz"));
+    const response = await handleRequest(new Request("http://localhost/livez"));
 
     expect(response.status).toBe(200);
     expect(response.headers.get("Cache-Control")).toBe("no-store");
@@ -45,7 +45,7 @@ describe("server", () => {
   });
 
   test("sets strict-transport-security on every response", async () => {
-    const paths = ["/healthz", "/api/config", "/api/locations", "/", "/privacy", "/does-not-exist.png"];
+    const paths = ["/livez", "/api/config", "/api/locations", "/", "/privacy", "/does-not-exist.png"];
 
     for (const path of paths) {
       const response = await handleRequest(new Request(`http://localhost${path}`));
