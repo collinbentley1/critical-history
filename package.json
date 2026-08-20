@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.4.0-canary.1",
+  "packageManager": "bun@1.4.0",
   "engines": {
-    "bun": ">=1.4.0-canary.1"
+    "bun": ">=1.4.0"
   },
   "scripts": {
     "dev": "bun run build && bun --watch src/server.ts",
@@ -18,7 +18,7 @@
     "format:check": "bun run tools/format.ts --check",
     "hooks:install": "git config core.hooksPath .githooks",
     "verify": "bun ci && bun run format:check && bun run lint && bun test && bun run build",
-    "verify:ci": "bun run format:check && bun run lint && bun test && bun run build"
+    "verify:ci": "bun run --parallel format:check lint test build"
   },
   "dependencies": {
     "mapbox-gl": "3.24.0"
