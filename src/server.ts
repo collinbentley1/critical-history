@@ -39,7 +39,7 @@ async function routeRequest(request: Request): Promise<Response> {
     });
   }
 
-  if (url.pathname === "/healthz") {
+  if (url.pathname === "/livez") {
     return json({ ok: true }, { "Cache-Control": "no-store" });
   }
 
