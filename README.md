@@ -16,10 +16,10 @@ The project is now a pure Bun application deployed to Google Cloud Run through G
 
 ## Local Development
 
-Use Bun canary, matching CI and the production Docker build:
+Use stable Bun 1.4, matching CI and the production Docker build (the Docker image pins `bun-v1.4.0` exactly):
 
 ```sh
-bun upgrade --canary
+bun upgrade --stable
 bun install
 cp .env.example .env.local
 bun run dev
