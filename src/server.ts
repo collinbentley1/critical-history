@@ -7,6 +7,10 @@ const BUILT_PUBLIC_DIR = resolve(import.meta.dir, "public");
 const SOURCE_PUBLIC_DIR = resolve(import.meta.dir, "..", "public");
 const PUBLIC_DIR = resolve(Bun.env.PUBLIC_DIR ?? (IS_BUILT_SERVER ? BUILT_PUBLIC_DIR : SOURCE_PUBLIC_DIR));
 
+const SECURITY_HEADERS: Readonly<Record<string, string>> = {
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+};
+
 const CONTENT_TYPES: Readonly<Record<string, string>> = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
@@ -22,6 +26,10 @@ const CONTENT_TYPES: Readonly<Record<string, string>> = {
 };
 
 export async function handleRequest(request: Request): Promise<Response> {
+  return withSecurityHeaders(await routeRequest(request));
+}
+
+async function routeRequest(request: Request): Promise<Response> {
   const url = new URL(request.url);
 
   if (request.method !== "GET" && request.method !== "HEAD") {
@@ -62,6 +70,19 @@ if (import.meta.main) {
   });
 
   console.info(`listening on ${server.url}`);
+}
+
+function withSecurityHeaders(response: Response): Response {
+  const headers = new Headers(response.headers);
+  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+    headers.set(key, value);
+  }
+
+  return new Response(response.body, {
+    headers,
+    status: response.status,
+    statusText: response.statusText,
+  });
 }
 
 function json(body: unknown, headers: HeadersInit = {}, status = 200): Response {

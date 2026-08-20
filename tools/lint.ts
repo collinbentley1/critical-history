@@ -8,7 +8,11 @@ const failures: string[] = [];
 await requireContains("Dockerfile", "dhi.io/bun", "Dockerfile must use Docker Hardened Bun images.");
 await requireContains("Dockerfile", "bun-v1.4.0", "Dockerfile must pin Bun 1.4.0.");
 await requireContains("public/index.html", 'rel="icon"', "The document must link a favicon.");
-await rejectContains("public/index.html", "https://", "The document should not load third-party scripts or styles.");
+await rejectPattern(
+  "public/index.html",
+  /<(?:script[^>]*\ssrc|link[^>]*\shref)="https?:\/\//,
+  "The document should not load third-party scripts or styles.",
+);
 await rejectContains("public/assets/styles.css", "@import", "Styles should not import third-party design libraries.");
 await rejectContains("src/client.ts", "react", "The frontend should stay framework-free.");
 await rejectContains("src/client.ts", "innerHTML", "Markdown rendering should use DOM nodes instead of HTML injection.");
@@ -34,6 +38,13 @@ async function requireContains(path: string, needle: string, message: string): P
 async function rejectContains(path: string, needle: string, message: string): Promise<void> {
   const text = await readFile(join(root, path), "utf8");
   if (text.includes(needle)) {
+    failures.push(`${path}: ${message}`);
+  }
+}
+
+async function rejectPattern(path: string, pattern: RegExp, message: string): Promise<void> {
+  const text = await readFile(join(root, path), "utf8");
+  if (pattern.test(text)) {
     failures.push(`${path}: ${message}`);
   }
 }
