@@ -3,11 +3,34 @@ import { handleRequest } from "../src/server";
 
 describe("server", () => {
   test("returns health status without caching", async () => {
-    const response = await handleRequest(new Request("http://localhost/livez"));
+    const previousNonce = Bun.env.PLATFORM_DEPLOY_NONCE;
 
-    expect(response.status).toBe(200);
-    expect(response.headers.get("Cache-Control")).toBe("no-store");
-    expect(await response.json()).toEqual({ ok: true });
+    try {
+      delete Bun.env.PLATFORM_DEPLOY_NONCE;
+      const response = await handleRequest(new Request("http://localhost/livez"));
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("Cache-Control")).toBe("no-store");
+      expect(await response.json()).toEqual({ ok: true });
+    } finally {
+      restoreEnv("PLATFORM_DEPLOY_NONCE", previousNonce);
+    }
+  });
+
+  test("binds preview health to the platform deployment nonce", async () => {
+    const previousNonce = Bun.env.PLATFORM_DEPLOY_NONCE;
+    const deployment = "a".repeat(64);
+
+    try {
+      Bun.env.PLATFORM_DEPLOY_NONCE = deployment;
+      const response = await handleRequest(new Request("http://localhost/livez"));
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("Cache-Control")).toBe("no-store");
+      expect(await response.json()).toEqual({ deployment, ok: true });
+    } finally {
+      restoreEnv("PLATFORM_DEPLOY_NONCE", previousNonce);
+    }
   });
 
   test("returns runtime config without a token by default", async () => {
@@ -82,6 +105,7 @@ describe("server", () => {
       expect(response.headers.get("Strict-Transport-Security")).toBe("max-age=31536000; includeSubDomains");
       expect(response.headers.get("Content-Security-Policy")).toContain("connect-src 'self' https://api.mapbox.com");
       expect(response.headers.get("Referrer-Policy")).toBe("strict-origin-when-cross-origin");
+      expect(response.headers.has("Set-Cookie")).toBe(false);
       expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
       expect(response.headers.get("X-Frame-Options")).toBe("DENY");
     }

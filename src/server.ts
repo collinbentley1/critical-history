@@ -59,7 +59,8 @@ async function routeRequest(request: Request): Promise<Response> {
   }
 
   if (url.pathname === "/livez") {
-    return json({ ok: true }, { "Cache-Control": "no-store" });
+    const deployment = Bun.env.PLATFORM_DEPLOY_NONCE;
+    return json(deployment ? { ok: true, deployment } : { ok: true }, { "Cache-Control": "no-store" });
   }
 
   if (url.pathname === "/api/config") {
