@@ -16,6 +16,12 @@ await rejectPattern(
 await rejectContains("public/assets/styles.css", "@import", "Styles should not import third-party design libraries.");
 await rejectContains("src/client.ts", "react", "The frontend should stay framework-free.");
 await rejectContains("src/client.ts", "innerHTML", "Markdown rendering should use DOM nodes instead of HTML injection.");
+await rejectContains("src/server.ts", "MAPBOX_ACCESS_TOKEN", "The app must never expose a secret-capable Mapbox token variable.");
+await requireContains("src/server.ts", "MAPBOX_PUBLIC_TOKEN", "The app must use a validated public Mapbox token variable.");
+await rejectContains("src/server.ts", "Bun.env.MAPBOX_STYLE", "The approved Mapbox style must not drift through runtime configuration.");
+await rejectContains("src/server.ts", "Bun.env.TYPEFORM_URL", "The approved Typeform URL must not drift through runtime configuration.");
+await requireContains("src/server.ts", "Content-Security-Policy", "Every response must carry a Content Security Policy.");
+await rejectContains("tools/build.ts", "sourcemap", "Production builds must not publish source maps or embedded sources.");
 
 for (const locationError of validateLocationSet(locations)) {
   failures.push(`src/locations: ${locationError}`);

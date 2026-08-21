@@ -25,7 +25,9 @@ cp .env.example .env.local
 bun run dev
 ```
 
-Set `MAPBOX_ACCESS_TOKEN` in your shell or `.env.local` if you want the map to load locally.
+Set a URL-restricted, read-only Mapbox `pk.*` token as `MAPBOX_PUBLIC_TOKEN`
+in your shell or `.env.local` if you want the map to load locally. The server
+rejects secret `sk.*` tokens rather than exposing them through `/api/config`.
 
 Run the full local check:
 
@@ -81,7 +83,7 @@ gh variable set GCP_TERRAFORM_SERVICE_ACCOUNT --repo collinbentley1/critical-his
 gh variable set GCP_PROD_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw prod_deploy_service_account_email)"
 gh variable set GCP_PREVIEW_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw preview_deploy_service_account_email)"
 gh variable set GCP_RUNTIME_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw runtime_service_account_email)"
-gh secret set MAPBOX_ACCESS_TOKEN --repo collinbentley1/critical-history --body "$MAPBOX_ACCESS_TOKEN"
+gh secret set MAPBOX_PUBLIC_TOKEN --env production --repo collinbentley1/critical-history --body "$MAPBOX_PUBLIC_TOKEN"
 ```
 
 The Dockerfile uses Docker Hardened Images. Add `DHI_USERNAME` and `DHI_ACCESS_TOKEN` as GitHub Actions secrets before enabling deploy workflows.
