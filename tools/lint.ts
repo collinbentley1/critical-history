@@ -6,7 +6,11 @@ const root = join(import.meta.dir, "..");
 const failures: string[] = [];
 
 await requireContains("Dockerfile", "dhi.io/bun", "Dockerfile must use Docker Hardened Bun images.");
-await requireContains("Dockerfile", "bun-v1.4.0", "Dockerfile must pin Bun 1.4.0.");
+await requireContains(
+  "Dockerfile",
+  "FROM oven/bun:1.4.0@sha256:",
+  "Dockerfile must pin Bun 1.4.0 by digest.",
+);
 await requireContains("public/index.html", 'rel="icon"', "The document must link a favicon.");
 await rejectPattern(
   "public/index.html",
