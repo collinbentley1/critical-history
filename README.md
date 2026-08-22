@@ -57,9 +57,10 @@ The Google Cloud project ID is `critical-history-16823277`.
 Do not add repository-scoped Actions secrets or GCP routing variables. The
 protected environments own the only deploy inputs:
 
-- `dependency-scan`: rotated Socket organization token.
-- `preview-build` and `production-build`: rotated DHI credentials and the
-  owner-reviewed Grype database manifest.
+- `preview-build` and `production-build`: rotated DHI credentials, the
+  least-scope Socket organization token, and the owner-reviewed Grype database
+  manifest.
+- the platform repository alone owns the trusted-main `dependency-scan` token.
 - `preview-cloud` and `production`: distinct URL-restricted public Mapbox
   `pk.*` values named `MAPBOX_PUBLIC_TOKEN`.
 - cloud publish/deploy/operator environments: exact-SHA WIF only; no static GCP
