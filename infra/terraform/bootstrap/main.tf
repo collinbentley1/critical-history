@@ -1,5 +1,5 @@
 module "bootstrap" {
-  source = "github.com/collinbentley1/platform//terraform/modules/bootstrap?ref=161ac5c7541073efe974499b67aaa607b8b77ee1"
+  source = "github.com/collinbentley1/platform//terraform/modules/bootstrap?ref=ddaa918319be123c780876d510efb4715c1f879d"
 
   app                         = "critical-history"
   project_id                  = var.project_id
@@ -12,12 +12,24 @@ module "bootstrap" {
   github_owner_id             = var.github_owner_id
   github_repository_id        = var.github_repository_id
   trusted_platform_workflow_shas = [
-    "161ac5c7541073efe974499b67aaa607b8b77ee1",
+    "ddaa918319be123c780876d510efb4715c1f879d",
   ]
   preview_operations_active_workflow_shas = [
-    "161ac5c7541073efe974499b67aaa607b8b77ee1",
+    "ddaa918319be123c780876d510efb4715c1f879d",
   ]
-  preview_operator_transition_workflow_shas              = []
+  preview_operator_transition_workflow_shas = []
+  required_services = [
+    "artifactregistry.googleapis.com",
+    "certificatemanager.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "compute.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "run.googleapis.com",
+    "serviceusage.googleapis.com",
+    "storage.googleapis.com",
+    "sts.googleapis.com",
+  ]
   legacy_compatibility_mode                              = false
   manage_automatic_default_service_account_grants_policy = var.manage_automatic_default_service_account_grants_policy
   runtime_description                                    = "Runtime identity for the critical-history Cloud Run services."

@@ -62,17 +62,21 @@ The Google Cloud project ID is `critical-history-16823277`.
 
 ## Protected configuration and rollout
 
-Do not add repository-scoped Actions secrets or GCP routing variables. The
-protected environments own the only deploy inputs:
+Do not add repository-scoped Actions secrets or GCP routing variables. The sole
+credential-bearing build environment is
+`dhi-base-prefetch-20260822-098dca9280b3`, shared by preview and production.
+It contains exactly the public-read-only
+`DHI_PUBLIC_READ_TOKEN_20260822_098DCA9280B3` secret and the non-confidential
+`DHI_USERNAME` variable. No Socket token or mutable Grype database manifest is
+stored in GitHub; Socket uses public policy and Grype data is byte-pinned in the
+reviewed platform commit. After inventory proof and old provider-token
+revocation, the retired `preview-build`, `production-build`, and
+`dependency-scan` environments must be empty and deleted.
 
-- `preview-build` and `production-build`: rotated DHI credentials, the
-  least-scope Socket organization token, and the owner-reviewed Grype database
-  manifest.
-- the platform repository alone owns the trusted-main `dependency-scan` token.
-- `preview-cloud` and `production`: distinct URL-restricted public Mapbox
-  `pk.*` values named `MAPBOX_PUBLIC_TOKEN`.
-- cloud publish/deploy/operator environments: exact-SHA WIF only; no static GCP
-  credential and no caller-selected routing value.
+`preview-cloud` and `production` expose only their URL-restricted public
+Mapbox `pk.*` value as the non-confidential `MAPBOX_PUBLIC_TOKEN` variable.
+Cloud publish, deploy, and operator environments otherwise carry exact-SHA WIF
+only: no static GCP credential and no caller-selected routing value.
 
 The runtime accepts only `MAPBOX_PUBLIC_TOKEN`; the retired
 `MAPBOX_ACCESS_TOKEN` name is rejected and cleared during deployment. Public
@@ -84,10 +88,12 @@ lock-free access to production metadata. Privileged bootstrap state lives in a
 separate protected bucket; no manual `terraform apply`, local-backend bootstrap,
 or consumer-workflow apply is supported.
 
-Before enabling Actions, rotate and install the environment values, delete the
-legacy repository secrets, require full-SHA Actions, and verify the protected
-bootstrap plan and state lineage. Keep Actions disabled until the exact WIF
-canaries, no-data preview identity, and final consumer SHA are proven.
+Before enabling Actions, verify the exact epoch DHI environment inventory,
+populate only its one secret and one variable, configure the protected public
+Mapbox variables, and delete legacy repository secrets. Require full-SHA Actions
+and verify the protected bootstrap plan and state lineage. Keep Actions disabled
+until the exact WIF canaries, no-data preview identity, and final consumer SHA
+are proven.
 
 ## Domain
 
