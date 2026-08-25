@@ -72,10 +72,22 @@ variable "prod_publisher_service_account_email" {
   default     = "gha-prod-publish@critical-history-16823277.iam.gserviceaccount.com"
 }
 
+variable "deployment_parity_reader_service_account_email" {
+  description = "Read-only deployment parity service account email."
+  type        = string
+  default     = "gha-deploy-parity@critical-history-16823277.iam.gserviceaccount.com"
+}
+
 variable "preview_deploy_service_account_email" {
   description = "Preview deploy service account email with exact-repository read access."
   type        = string
   default     = "gha-preview-deploy@critical-history-16823277.iam.gserviceaccount.com"
+}
+
+variable "preview_commit_service_account_email" {
+  description = "Preview traffic/exposure transaction service account email."
+  type        = string
+  default     = "gha-preview-commit@critical-history-16823277.iam.gserviceaccount.com"
 }
 
 variable "preview_operator_service_account_email" {
