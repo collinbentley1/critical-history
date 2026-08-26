@@ -2,7 +2,7 @@ terraform {
   required_version = "~> 1.14.0"
 
   backend "gcs" {
-    bucket = "critical-history-tfstate-422714632513"
+    bucket = "critical-history-tfstate-422714632513-bootstrap"
     prefix = "critical-history/bootstrap"
   }
 

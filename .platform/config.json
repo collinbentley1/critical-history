@@ -1,8 +1,8 @@
 {
   "name": "critical-history",
   "projectId": "critical-history-16823277",
+  "githubRepositoryId": "280932482",
   "region": "us-east4",
   "serviceName": "critical-history",
-  "artifactRegistryRepository": "site",
-  "runtimeConfigScript": ".github/platform/runtime-config.sh"
+  "artifactRegistryRepository": "site"
 }
