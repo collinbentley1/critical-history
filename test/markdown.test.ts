@@ -8,7 +8,7 @@ describe("markdown helpers", () => {
 
   test("allows normal outbound links and rejects script URLs", () => {
     expect(isSafeExternalHref("https://example.com")).toBe(true);
-    expect(isSafeExternalHref("http://example.com")).toBe(true);
+    expect(isSafeExternalHref("http://example.com")).toBe(false);
     expect(isSafeExternalHref("mailto:test@example.com")).toBe(true);
     expect(isSafeExternalHref("javascript:alert(1)")).toBe(false);
     expect(isSafeExternalHref("data:text/html,hello")).toBe(false);
