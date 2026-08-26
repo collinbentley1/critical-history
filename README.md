@@ -16,16 +16,26 @@ The project is now a pure Bun application deployed to Google Cloud Run through G
 
 ## Local Development
 
-Use stable Bun 1.4, matching CI and the production Docker build (the Docker image pins `bun-v1.4.0` exactly):
+Use Bun `1.4.0` at the exact reviewed revision
+`34cbb9a40b4bd1bd767d134a7065e66c2432a676`, matching CI and the production
+container. Before installing dependencies or running a repository script, fail
+closed on the full embedded revision:
 
 ```sh
-bun upgrade --stable
+bun -e 'if (Bun.version !== "1.4.0" || Bun.revision !== "34cbb9a40b4bd1bd767d134a7065e66c2432a676") throw new Error("Bun must be 1.4.0+34cbb9a40")'
 bun install
 cp .env.example .env.local
 bun run dev
 ```
 
-Set `MAPBOX_ACCESS_TOKEN` in your shell or `.env.local` if you want the map to load locally.
+Never install or upgrade Bun from a moving `stable`, `latest`, or `canary`
+channel for this repository. `bun --revision` is a convenient display check,
+but it abbreviates the commit; the assertion above is the canonical local
+check. The Docker image pins `bun-v1.4.0` exactly.
+
+Set a URL-restricted, read-only Mapbox `pk.*` token as `MAPBOX_PUBLIC_TOKEN`
+in your shell or `.env.local` if you want the map to load locally. The server
+rejects secret `sk.*` tokens rather than exposing them through `/api/config`.
 
 Run the full local check:
 
@@ -35,60 +45,62 @@ bun run verify
 
 ## Deployment Model
 
-- Pull requests deploy Cloud Run preview services named `critical-history-pr-<number>`.
-- Closing a pull request deletes its preview Cloud Run service.
-- Pushes to `main` deploy the production Cloud Run service named `critical-history`.
-- Terraform manages only long-lived shared infrastructure. It does not manage preview environments.
+- Same-repository, non-draft pull requests publish a scanned image and attach an
+  exact-head `pr-<number>` tag to the shared no-data preview service. A new head,
+  draft conversion, or close invalidates that tag; hourly reconciliation removes
+  orphaned tags.
+- External-fork and Dependabot pull requests run secretless application checks
+  but never receive build, cloud, or preview credentials.
+- A push to `main` runs metadata-only infrastructure convergence first, then
+  publishes and deploys the exact scanned production digest.
+- Consumer Terraform roots are reviewed validation mirrors. They are never
+  executed with Google credentials. Only the owner-controlled protected
+  bootstrap pipeline may run the immutable deployment roots in the exact
+  platform commit.
 
-The Google Cloud project display name is `critical-history`. The exact project ID `critical-history` was already reserved globally, so this deployment uses `critical-history-16823277`.
+The Google Cloud project ID is `critical-history-16823277`.
 
-## Bootstrap
+## Protected configuration and rollout
 
-The bootstrap root is applied manually because it creates the GitHub Actions identities that later run production Terraform.
+Do not add repository-scoped Actions secrets or GCP routing variables. The sole
+credential-bearing build environment is
+`dhi-base-prefetch-20260822-098dca9280b3`, shared by preview and production.
+It contains exactly the public-read-only
+`DHI_PUBLIC_READ_TOKEN_20260822_098DCA9280B3` secret and the non-confidential
+`DHI_USERNAME` variable. No Socket token or mutable Grype database manifest is
+stored in GitHub; Socket uses public policy and Grype data is byte-pinned in the
+reviewed platform commit. After inventory proof and old provider-token
+revocation, the retired `preview-build`, `production-build`, and
+`dependency-scan` environments must be empty and deleted.
 
-```sh
-gcloud services enable \
-  serviceusage.googleapis.com \
-  cloudresourcemanager.googleapis.com \
-  iam.googleapis.com \
-  iamcredentials.googleapis.com \
-  sts.googleapis.com \
-  storage.googleapis.com \
-  run.googleapis.com \
-  artifactregistry.googleapis.com \
-  --project=critical-history-16823277
+`preview-cloud` and `production` expose only their URL-restricted public
+Mapbox `pk.*` value as the non-confidential `MAPBOX_PUBLIC_TOKEN` variable.
+Cloud publish, deploy, and operator environments otherwise carry exact-SHA WIF
+only: no static GCP credential and no caller-selected routing value.
 
-export GOOGLE_OAUTH_ACCESS_TOKEN="$(gcloud auth print-access-token)"
-terraform -chdir=infra/terraform/bootstrap init
-terraform -chdir=infra/terraform/bootstrap apply
-terraform -chdir=infra/terraform/prod init
-terraform -chdir=infra/terraform/prod apply
-```
+The runtime accepts only `MAPBOX_PUBLIC_TOKEN`; the retired
+`MAPBOX_ACCESS_TOKEN` name is rejected and cleared during deployment. Public
+Mapbox tokens must be restricted to the intended preview or production origins.
 
-Both Terraform roots use a GCS backend:
+Bootstrap, WIF/IAM cutover, state migration, and rollback follow the exact
+platform commit's `docs/security-rollout.md`. Routine convergence has read-only,
+lock-free access to production metadata. Privileged bootstrap state lives in a
+separate protected bucket; no manual `terraform apply`, local-backend bootstrap,
+or consumer-workflow apply is supported.
 
-```text
-bucket: critical-history-tfstate-422714632513
-prefix: critical-history/bootstrap
-prefix: critical-history/prod
-```
-
-After bootstrap, set these repository variables from Terraform output:
-
-```sh
-gh variable set GCP_WORKLOAD_IDENTITY_PROVIDER --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw workload_identity_provider)"
-gh variable set GCP_TERRAFORM_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw terraform_service_account_email)"
-gh variable set GCP_PROD_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw prod_deploy_service_account_email)"
-gh variable set GCP_PREVIEW_DEPLOY_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw preview_deploy_service_account_email)"
-gh variable set GCP_RUNTIME_SERVICE_ACCOUNT --repo collinbentley1/critical-history --body "$(terraform -chdir=infra/terraform/bootstrap output -raw runtime_service_account_email)"
-gh secret set MAPBOX_ACCESS_TOKEN --repo collinbentley1/critical-history --body "$MAPBOX_ACCESS_TOKEN"
-```
-
-The Dockerfile uses Docker Hardened Images. Add `DHI_USERNAME` and `DHI_ACCESS_TOKEN` as GitHub Actions secrets before enabling deploy workflows.
+Before enabling Actions, verify the exact epoch DHI environment inventory,
+populate only its one secret and one variable, configure the protected public
+Mapbox variables, and delete legacy repository secrets. Require full-SHA Actions
+and verify the protected bootstrap plan and state lineage. Keep Actions disabled
+until the exact WIF canaries, no-data preview identity, and final consumer SHA
+are proven.
 
 ## Domain
 
-Production custom domain mappings are `ycriticalhistory.org` and `www.ycriticalhistory.org`. Verify the domain with Google Search Console before applying Terraform, then add the DNS records emitted by the `cloud_run_domain_mappings` output at the authoritative DNS provider.
+Production custom domain mappings are `ycriticalhistory.org` and
+`www.ycriticalhistory.org`. Their protected exposure state is managed separately
+from routine production convergence; DNS changes require an owner-reviewed
+exposure plan.
 
 ## License
 

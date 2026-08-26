@@ -306,8 +306,8 @@ async function setupMap(config: AppConfig): Promise<void> {
     for (const location of appLocations) {
       addMarker(location);
     }
-  } catch (error) {
-    console.error(error);
+  } catch {
+    console.error("map setup failed");
     showMapStatus("Map unavailable.");
   }
 }

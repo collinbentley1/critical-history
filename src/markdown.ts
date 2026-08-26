@@ -11,7 +11,7 @@ export function splitMarkdownBlocks(markdown: string): string[] {
 export function isSafeExternalHref(href: string): boolean {
   try {
     const url = new URL(href, "https://critical-history.local");
-    return url.protocol === "http:" || url.protocol === "https:" || url.protocol === "mailto:";
+    return url.protocol === "https:" || url.protocol === "mailto:";
   } catch {
     return false;
   }
@@ -87,7 +87,7 @@ function renderLink(label: string, href: string): Node {
   anchor.href = href;
   anchor.textContent = label;
 
-  if (anchor.protocol === "http:" || anchor.protocol === "https:") {
+  if (anchor.protocol === "https:") {
     anchor.rel = "noopener noreferrer";
     anchor.target = "_blank";
   }
