@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   infrastructure:
-    uses: collinbentley1/platform/.github/workflows/infrastructure.yml@v0.4.0
+    uses: collinbentley1/platform/.github/workflows/infrastructure.yml@v0.5.21
     with:
       project-id: critical-history-16823277
       workload-identity-provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
