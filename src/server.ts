@@ -1,3 +1,4 @@
+import { realpath, stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 import { locations } from "./locations";
 
@@ -6,9 +7,19 @@ const IS_BUILT_SERVER = import.meta.dir.endsWith("/dist");
 const BUILT_PUBLIC_DIR = resolve(import.meta.dir, "public");
 const SOURCE_PUBLIC_DIR = resolve(import.meta.dir, "..", "public");
 const PUBLIC_DIR = resolve(Bun.env.PUBLIC_DIR ?? (IS_BUILT_SERVER ? BUILT_PUBLIC_DIR : SOURCE_PUBLIC_DIR));
+const DEFAULT_MAP_STYLE = "mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3?optimize=true";
+const DEFAULT_TYPEFORM_URL = "https://cdbentley.typeform.com/to/fgEAT2ps";
 
 const SECURITY_HEADERS: Readonly<Record<string, string>> = {
+  "Content-Security-Policy":
+    "default-src 'self'; base-uri 'none'; child-src blob:; connect-src 'self' https://api.mapbox.com https://events.mapbox.com; font-src 'self' data:; form-action 'none'; frame-ancestors 'none'; img-src 'self' data: blob:; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self' blob:",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Cross-Origin-Resource-Policy": "same-origin",
+  "Permissions-Policy": "camera=(), geolocation=(), microphone=(), payment=()",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
 };
 
 const CONTENT_TYPES: Readonly<Record<string, string>> = {
@@ -26,7 +37,15 @@ const CONTENT_TYPES: Readonly<Record<string, string>> = {
 };
 
 export async function handleRequest(request: Request): Promise<Response> {
-  return withSecurityHeaders(await routeRequest(request));
+  try {
+    const response = withSecurityHeaders(await routeRequest(request));
+    return request.method === "HEAD"
+      ? new Response(null, { headers: response.headers, status: response.status, statusText: response.statusText })
+      : response;
+  } catch (error) {
+    console.error("request failed", error instanceof Error ? error.name : "unknown error");
+    return withSecurityHeaders(new Response("internal server error", { status: 500 }));
+  }
 }
 
 async function routeRequest(request: Request): Promise<Response> {
@@ -40,15 +59,16 @@ async function routeRequest(request: Request): Promise<Response> {
   }
 
   if (url.pathname === "/livez") {
-    return json({ ok: true }, { "Cache-Control": "no-store" });
+    const deployment = Bun.env.PLATFORM_DEPLOY_NONCE;
+    return json(deployment ? { ok: true, deployment } : { ok: true }, { "Cache-Control": "no-store" });
   }
 
   if (url.pathname === "/api/config") {
     return json(
       {
-        mapStyle: Bun.env.MAPBOX_STYLE ?? "mapbox://styles/collinbentley1/ckd3kwqqw060a1iqgtjne8xs3?optimize=true",
-        mapboxAccessToken: Bun.env.MAPBOX_ACCESS_TOKEN ?? "",
-        typeformUrl: Bun.env.TYPEFORM_URL ?? "https://cdbentley.typeform.com/to/fgEAT2ps",
+        mapStyle: DEFAULT_MAP_STYLE,
+        mapboxAccessToken: readPublicMapboxToken(Bun.env.MAPBOX_PUBLIC_TOKEN),
+        typeformUrl: DEFAULT_TYPEFORM_URL,
       },
       { "Cache-Control": "no-store" },
     );
@@ -59,13 +79,19 @@ async function routeRequest(request: Request): Promise<Response> {
   }
 
   const response = await serveStatic(url.pathname);
-  return request.method === "HEAD" ? new Response(null, { headers: response.headers, status: response.status, statusText: response.statusText }) : response;
+  return response;
 }
 
 if (import.meta.main) {
   const server = Bun.serve({
+    development: false,
+    error(error) {
+      console.error("server error", error instanceof Error ? error.name : "unknown error");
+      return withSecurityHeaders(new Response("internal server error", { status: 500 }));
+    },
     fetch: handleRequest,
     hostname: "0.0.0.0",
+    maxRequestBodySize: 1_024,
     port: PORT,
   });
 
@@ -101,36 +127,45 @@ async function serveStatic(pathname: string): Promise<Response> {
     return new Response("not found", { status: 404 });
   }
 
-  let file = Bun.file(filePath);
-  let pathForType = file.name ?? filePath;
+  let fileResult = await resolveExistingFile(PUBLIC_DIR, filePath);
 
-  if (!(await file.exists()) && !IS_BUILT_SERVER && PUBLIC_DIR === SOURCE_PUBLIC_DIR) {
+  if (!fileResult && !IS_BUILT_SERVER && PUBLIC_DIR === SOURCE_PUBLIC_DIR) {
     const builtFilePath = resolveStaticPath(BUILT_PUBLIC_DIR, pathname);
     if (builtFilePath) {
-      const builtFile = Bun.file(builtFilePath);
-      if (await builtFile.exists()) {
-        file = builtFile;
-        pathForType = builtFile.name ?? builtFilePath;
-      }
+      fileResult = await resolveExistingFile(BUILT_PUBLIC_DIR, builtFilePath);
     }
   }
 
-  if (!(await file.exists()) && shouldServeAppShell(pathname)) {
-    file = Bun.file(resolve(PUBLIC_DIR, "index.html"));
-    pathForType = file.name ?? resolve(PUBLIC_DIR, "index.html");
+  if (!fileResult && shouldServeAppShell(pathname)) {
+    fileResult = await resolveExistingFile(PUBLIC_DIR, resolve(PUBLIC_DIR, "index.html"));
   }
 
-  if (!(await file.exists())) {
+  if (!fileResult) {
     return new Response("not found", { status: 404 });
   }
 
-  return new Response(file, {
+  return new Response(fileResult.file, {
     headers: {
-      "Cache-Control": cacheControl(pathForType),
-      "Content-Type": CONTENT_TYPES[extname(pathForType)] ?? "application/octet-stream",
-      "X-Content-Type-Options": "nosniff",
+      "Cache-Control": cacheControl(fileResult.path),
+      "Content-Type": CONTENT_TYPES[extname(fileResult.path)] ?? "application/octet-stream",
     },
   });
+}
+
+async function resolveExistingFile(publicDir: string, filePath: string): Promise<{ file: ReturnType<typeof Bun.file>; path: string } | undefined> {
+  try {
+    const [canonicalRoot, canonicalPath] = await Promise.all([realpath(publicDir), realpath(filePath)]);
+    if (
+      (canonicalPath !== canonicalRoot && !canonicalPath.startsWith(`${canonicalRoot}${sep}`)) ||
+      !(await stat(canonicalPath)).isFile()
+    ) {
+      return undefined;
+    }
+
+    return { file: Bun.file(canonicalPath), path: canonicalPath };
+  } catch {
+    return undefined;
+  }
 }
 
 function resolveStaticPath(publicDir: string, pathname: string): string | null {
@@ -138,6 +173,10 @@ function resolveStaticPath(publicDir: string, pathname: string): string | null {
   try {
     decodedPathname = decodeURIComponent(pathname);
   } catch {
+    return null;
+  }
+
+  if (decodedPathname.length > 2_048 || /[\u0000-\u001F\u007F]/.test(decodedPathname)) {
     return null;
   }
 
@@ -158,4 +197,17 @@ function shouldServeAppShell(pathname: string): boolean {
 
 function cacheControl(path: string): string {
   return path.endsWith(".css") || path.endsWith(".html") || path.endsWith(".js") ? "no-cache" : "public, max-age=300";
+}
+
+function readPublicMapboxToken(value: string | undefined): string {
+  const token = value?.trim() ?? "";
+  if (!token) {
+    return "";
+  }
+
+  if (!/^pk\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token)) {
+    throw new Error("MAPBOX_PUBLIC_TOKEN must be a public pk token.");
+  }
+
+  return token;
 }

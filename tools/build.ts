@@ -20,7 +20,6 @@ const clientBuild = await Bun.build({
   naming: "assets/client.js",
   outdir: distPublicDir,
   splitting: true,
-  sourcemap: "external",
   target: "browser",
 });
 
@@ -31,7 +30,6 @@ const serverBuild = await Bun.build({
   external: ["*.html", "*.css", "*.jpg", "*.md", "*.png", "*.svg", "*.webmanifest", "*.xml"],
   minify: false,
   outdir: distDir,
-  sourcemap: "external",
   target: "bun",
 });
 
