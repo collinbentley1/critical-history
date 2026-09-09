@@ -16,13 +16,13 @@ The project is now a pure Bun application deployed to Google Cloud Run through G
 
 ## Local Development
 
-Use Bun `1.4.0` at the exact reviewed revision
-`34cbb9a40b4bd1bd767d134a7065e66c2432a676`, matching CI and the production
+Use Bun `1.4.2` at the exact reviewed revision
+`744846f844374847c902b5e7fd59b4342a51ef99`, matching CI and the production
 container. Before installing dependencies or running a repository script, fail
 closed on the full embedded revision:
 
 ```sh
-bun -e 'if (Bun.version !== "1.4.0" || Bun.revision !== "34cbb9a40b4bd1bd767d134a7065e66c2432a676") throw new Error("Bun must be 1.4.0+34cbb9a40")'
+bun -e 'if (Bun.version !== "1.4.2" || Bun.revision !== "744846f844374847c902b5e7fd59b4342a51ef99") throw new Error("Bun must be 1.4.2+744846f84")'
 bun install
 cp .env.example .env.local
 bun run dev
@@ -31,7 +31,7 @@ bun run dev
 Never install or upgrade Bun from a moving `stable`, `latest`, or `canary`
 channel for this repository. `bun --revision` is a convenient display check,
 but it abbreviates the commit; the assertion above is the canonical local
-check. The Docker image pins `bun-v1.4.0` exactly.
+check. The Docker image pins `bun-v1.4.2` exactly.
 
 Set a URL-restricted, read-only Mapbox `pk.*` token as `MAPBOX_PUBLIC_TOKEN`
 in your shell or `.env.local` if you want the map to load locally. The server
