@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.4.0",
+  "packageManager": "bun@1.4.2",
   "engines": {
     "bun": ">=1.4.0"
   },
@@ -21,7 +21,8 @@
     "verify:ci": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build"
   },
   "dependencies": {
-    "mapbox-gl": "3.29.0"
+    "mapbox-gl": "3.29.0",
+    "jose": "6.1.3"
   },
   "devDependencies": {
     "@types/bun": "1.4.0",
