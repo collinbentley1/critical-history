@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "mapbox-gl": "3.29.0",
-    "jose": "6.2.12",
-    "firebase-admin": "14.5.0",
-    "rate-limiter-flexible": "11.2.3"
+    "jose": "6.2.12"
   },
   "devDependencies": {
     "@types/bun": "1.4.0",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "firebase-admin": "14.5.0",
+    "rate-limiter-flexible": "11.2.3"
   }
 }
