@@ -21,10 +21,10 @@
     "verify:ci": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build"
   },
   "dependencies": {
-    "mapbox-gl": "3.29.0"
+    "mapbox-gl": "3.33.0"
   },
   "devDependencies": {
-    "@types/bun": "1.4.0",
+    "@types/bun": "1.4.3",
     "typescript": "7.0.2"
   }
 }
