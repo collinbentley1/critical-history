@@ -1,3 +1,4 @@
+import { secureHandler } from "../.platform/runtime/http.ts";
 import { realpath, stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 import { locations } from "./locations";
@@ -36,7 +37,7 @@ const CONTENT_TYPES: Readonly<Record<string, string>> = {
   ".xml": "application/xml; charset=utf-8",
 };
 
-export async function handleRequest(request: Request): Promise<Response> {
+async function applicationRequest(request: Request): Promise<Response> {
   try {
     const response = withSecurityHeaders(await routeRequest(request));
     return request.method === "HEAD"
@@ -81,6 +82,8 @@ async function routeRequest(request: Request): Promise<Response> {
   const response = await serveStatic(url.pathname);
   return response;
 }
+
+export const handleRequest = secureHandler(applicationRequest);
 
 if (import.meta.main) {
   const server = Bun.serve({
