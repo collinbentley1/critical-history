@@ -7,6 +7,11 @@ on:
     types: [created, edited]
   pull_request_review:
     types: [submitted]
+  pull_request_review_comment:
+    types: [created, edited, deleted]
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
 
 permissions: {}
 
@@ -18,5 +23,5 @@ jobs:
       pull-requests: read
       checks: write
     with:
-      platform_sha: dc8d6c1a6f8c619ca9c19904d6448544324d8c6d
-    uses: collinbentley1/platform/.github/workflows/review-gate-v1.yml@dc8d6c1a6f8c619ca9c19904d6448544324d8c6d
+      platform_sha: 97e093b361f39b8fa7da63d34b8cfa0e0ad62edf
+    uses: collinbentley1/platform/.github/workflows/review-gate-v1.yml@97e093b361f39b8fa7da63d34b8cfa0e0ad62edf
